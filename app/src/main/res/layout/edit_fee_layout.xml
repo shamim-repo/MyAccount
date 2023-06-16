@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/edit_fee_layout"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:elevation="10dp"
+        android:maxWidth="600dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mat_white"
+            android:orientation="vertical"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="25dp">
+
+            <TextView
+                android:id="@+id/title_fee_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Fee"
+                android:textColor="@color/dark_green"
+                android:textSize="40sp"
+                android:typeface="serif" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_class"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView555"
+                    android:backgroundTint="@color/darker_green2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4">
+                <Spinner
+                    android:id="@+id/add_fee_class_spinner"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:elevation="10dp"
+                    android:popupBackground="@color/white"
+                    android:spinnerMode="dropdown" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/select_group"
+                    app:layout_constraintStart_toEndOf="@+id/cardView555"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView55"
+                    android:layout_marginLeft="15dp"
+                    android:backgroundTint="@color/darker_green2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/cardView555"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5" >
+                <Spinner
+                    android:id="@+id/add_fee_group_spinner"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:elevation="10dp"
+                    android:popupBackground="@color/white"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintStart_toEndOf="@+id/cardView555"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/login_email_edit_text_field"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    app:boxBackgroundColor="#A4438E68"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="2dp"
+                    app:hintTextColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView555"
+                    app:startIconDrawable="@drawable/baseline_attach_money_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/add_fee_amount_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Fee Amount"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/login_email_edit_text_field66"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginVertical="10dp"
+                    app:boxBackgroundColor="#A4438E68"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="2dp"
+                    android:layout_marginRight="10dp"
+                    app:hintTextColor="@color/black"
+                    android:clickable="false"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toStartOf="@+id/edit_fee_pick_month_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/login_email_edit_text_field"
+                    app:startIconDrawable="@drawable/baseline_calendar_month_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_fee_month_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="false"
+                        android:hint="Month"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:id="@+id/edit_fee_pick_month_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/light_red"
+                    android:clickable="true"
+                    android:text="@string/pick_month"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    app:cornerRadius="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/login_email_edit_text_field" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

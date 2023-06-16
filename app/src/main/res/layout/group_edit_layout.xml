@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/edit_group_layout">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/white"
+            android:elevation="10dp"
+            android:maxWidth="600dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/mat_white"
+                android:orientation="vertical"
+                android:paddingHorizontal="15dp">
+
+                <TextView
+                    android:id="@+id/title_group_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/group"
+                    android:textColor="@color/dark_green"
+                    android:textSize="30sp"
+                    android:typeface="serif" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_class"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="10dp"
+                    android:backgroundTint="@color/darker_green2">
+
+                <Spinner
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/edit_group_class_spinner"
+                    android:elevation="10dp"
+                    android:popupBackground="@color/white"
+                    android:spinnerMode="dropdown" />
+                </androidx.cardview.widget.CardView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/login_email_edit_text_field"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:boxBackgroundColor="#A4438E68"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="2dp"
+                    app:hintTextColor="@color/black">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_group_name_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/group_name"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    app:dividerColor="@color/light_green"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time"
+                    android:textSize="25sp"
+                    android:layout_gravity="center_horizontal"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/time_from_text_view"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:background="@color/green_fading"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textSize="30sp" />
+
+                        <RadioGroup
+                            android:clickable="false"
+                            android:id="@+id/time_from_radio_group"
+                            android:layout_width="120dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/pink_out_line"
+                            android:checkedButton="@+id/time_from_am"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:id="@+id/time_from_am"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/toggle_widget_background"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="AM"
+                                android:textColor="@color/white" />
+
+                            <RadioButton
+                                android:enabled="false"
+                                android:clickable="false"
+                                android:id="@+id/time_from_pm"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginRight="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/toggle_widget_background"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="PM"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/time_from_button"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
+                            android:backgroundTint="@color/light_red"
+                            android:clickable="true"
+                            android:text="From"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            app:cornerRadius="10dp"
+                            app:icon="@drawable/baseline_chevron_left_24"
+                            app:iconSize="30dp"
+                            app:iconTintMode="multiply" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/time_to_text_view"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:background="@color/green_fading"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:textSize="30sp" />
+
+                        <RadioGroup
+                            android:clickable="false"
+                            android:id="@+id/time_to_to_group"
+                            android:layout_width="120dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/pink_out_line"
+                            android:checkedButton="@+id/time_to_am"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:id="@+id/time_to_am"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/toggle_widget_background"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="AM"
+                                android:textColor="@color/white" />
+
+                            <RadioButton
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:id="@+id/time_to_pm"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginRight="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/toggle_widget_background"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="PM"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/time_to_button"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
+                            android:backgroundTint="@color/light_red"
+                            android:clickable="true"
+                            android:text="To"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            app:cornerRadius="10dp"
+                            app:icon="@drawable/baseline_chevron_right_24"
+                            app:iconGravity="end"
+                            app:iconSize="30dp"
+                            app:iconTintMode="multiply" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/edit_group_starting_date_text_input_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        app:boxBackgroundColor="#A4438E68"
+                        app:boxStrokeColor="@color/white"
+                        app:boxStrokeWidth="2dp"
+                        android:layout_weight="1"
+                        app:hintTextColor="@color/black"
+                        android:layout_marginRight="10dp"
+                        android:clickable="false"
+                        android:enabled="false"
+                        app:startIconDrawable="@drawable/baseline_date_range_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_group_starting_date_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/starting_date"
+                        android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/edit_group_starting_date_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="2"
+                        android:backgroundTint="@color/light_red"
+                        android:clickable="true"
+                        android:text="Pick"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        app:cornerRadius="10dp"
+                        app:icon="@drawable/baseline_calendar_month_24"
+                        app:iconSize="30dp"
+                        app:iconTintMode="multiply" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+</FrameLayout>

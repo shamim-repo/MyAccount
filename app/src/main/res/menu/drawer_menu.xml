@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/baseline_space_dashboard_24"
+            android:title="@string/dashboard"/>
+        <item
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/baseline_done_24"
+            android:title="@string/attendance"/>
+
+        <item
+            android:id="@+id/nav_payment"
+            android:icon="@drawable/baseline_payments_24"
+            android:title="@string/payment_due"/>
+        <item
+            android:id="@+id/nav_class"
+            android:icon="@drawable/baseline_menu_book_24"
+            android:title="@string/classe"
+            android:visible="true">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_add_class"
+                        android:icon="@drawable/baseline_add_circle_24"
+                        android:title="@string/add_class" />
+                    <item
+                        android:id="@+id/nav_manage_class"
+                        android:icon="@drawable/baseline_edit_24"
+                        android:title="@string/manage_class" />
+                    <item
+                        android:id="@+id/nav_add_group"
+                        android:icon="@drawable/baseline_add_circle_24"
+                        android:title="@string/add_group" />
+                    <item
+                        android:id="@+id/nav_mange_group"
+                        android:icon="@drawable/baseline_edit_24"
+                        android:title="@string/mange_group" />
+                </group>
+            </menu>
+        </item>
+    <item
+        android:id="@+id/nav_Student"
+        android:icon="@drawable/baseline_person_24"
+        android:title="@string/student">
+        <menu>
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_add_student"
+                android:icon="@drawable/baseline_person_add_alt_1_24"
+                android:title="@string/add_student" />
+            <item
+                android:id="@+id/nav_manage_student"
+                android:icon="@drawable/baseline_edit_24"
+                android:title="@string/manage_student" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/nav_fee"
+        android:icon="@drawable/baseline_attach_money_24"
+        android:title="@string/fee">
+        <menu>
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_add_fee"
+                android:icon="@drawable/baseline_add_circle_24"
+                android:title="@string/add_fee" />
+            <item
+                android:id="@+id/nav_manage_fee"
+                android:icon="@drawable/baseline_edit_24"
+                android:title="@string/manage_fee" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:title="">
+        <menu>
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/baseline_settings_24"
+                android:title="@string/setting"/>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/baseline_question_mark_24"
+                android:title="@string/about"/>
+            </group>
+        </menu>
+    </item>
+    </group>
+</menu>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/log_in"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_green"
+    tools:context=".ui.main.login.LogInFragment">
+
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/circularRevealCardView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="-100dp"
+            android:alpha="1"
+            android:clickable="false"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/light_green"
+            app:cardCornerRadius="70dp"
+            app:cardElevation="10dp"
+            app:cardForegroundColor="#0C2B2222"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/my_account_logo"/>
+
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/white"
+            android:elevation="10dp"
+            android:maxWidth="600dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/circularRevealCardView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="15dp"
+                android:background="@color/mat_white"
+                android:paddingVertical="25dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/login_email_edit_text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:boxBackgroundColor="#A4438E68"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="2dp"
+                    app:startIconDrawable="@drawable/baseline_email_24"
+                    app:hintTextColor="@color/black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/login_email_edit_text_field1"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/login_password_edit_text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:boxBackgroundColor="#A4438E68"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="2dp"
+                    app:hintTextColor="@color/black"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/light_red"
+                    app:startIconDrawable="@drawable/baseline_password_24"
+                    style="@style/My.EditText.Style">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/login_password_edit_text_field1"
+                        android:inputType="textPassword"
+                        android:hint="@string/password"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/login_button"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/login"
+        android:clickable="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:cornerRadius="30dp"
+        android:backgroundTint="@color/light_red"
+        app:icon="@drawable/right_arrow"
+        app:iconGravity="end"
+        app:iconTintMode="multiply"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        />
+
+    <TextView
+            android:id="@+id/create_new_account_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_new_account"
+            android:textColor="@color/light_red"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Don't have an account? "
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

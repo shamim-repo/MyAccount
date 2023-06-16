@@ -1,0 +1,98 @@
+<resources>
+    <string name="app_name">My Account</string>
+    <string name="email">Email</string>
+    <string name="create_new_account">Create new account.</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">SIGNUP</string>
+    <string name="full_name">Full Name</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
+    <string name="admin_name">Admin Name</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="add_class">Add Class</string>
+    <string name="add_group">Add Group</string>
+    <string name="mange_group">Mange Group</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="classe">Class</string>
+    <string name="add_student">Add Student</string>
+    <string name="student">Student</string>
+    <string name="manage_student">Manage Student</string>
+    <string name="add_fee">Add Fee</string>
+    <string name="payment_due">Payment/ Due</string>
+    <string name="attendance">Attendance</string>
+    <string name="add_class_date">Add Class Date</string>
+    <string name="setting">Setting</string>
+    <string name="fee">Fee</string>
+    <string name="about">About</string>
+    <string name="manage_fee">Manage Fee</string>
+    <string name="manage_class">Manage Class</string>
+    <string name="class_name">Class Name</string>
+    <string name="delete">Delete</string>
+    <string name="add">ADD</string>
+    <string name="save">Save</string>
+    <string name="select_class">Select Class</string>
+    <string name="group_name">Group Name</string>
+    <string name="update">Update</string>
+    <string name="filter">Filter</string>
+    <string name="select_group">Select Group</string>
+    <string name="group_name_">Group Name: </string>
+    <string name="fee_amount">Fee Amount: </string>
+    <string name="id">ID</string>
+    <string name="school_name">School Name</string>
+    <string name="guardian_name">Guardian Name</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="starting_date">Starting Date</string>
+    <string name="payment_status">Payment Status</string>
+    <string name="current_password">Current Password</string>
+    <string name="example_gmail_com">example@gmail.com</string>
+    <string name="select_email">Select Email</string>
+    <string name="logout">Logout</string>
+    <string name="pick_month">Pick Month</string>
+    <string name="new_password">New Password</string>
+    <string name="group">Group</string>
+    <string name="active_status">Active Status</string>
+    <string name="month">Month: </string>
+
+    <string-array name="select_class">
+        <item>@string/select_class</item>
+    </string-array>
+
+    <string-array name="select_group">
+        <item>@string/select_group</item>
+    </string-array>
+    <string-array name="select_payment_status">
+        <item>All</item>
+        <item>Paid</item>
+        <item>Due</item>
+    </string-array>
+
+
+</resources>

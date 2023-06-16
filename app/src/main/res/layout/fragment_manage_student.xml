@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.drawer.student.manageStudent.ManageStudentFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_class"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/manage_student_class_card_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardElevation="10dp"
+            android:backgroundTint="@color/darker_green2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
+        <Spinner
+            android:id="@+id/manage_student_class_spinner"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:elevation="10dp"
+            android:popupBackground="@color/white"
+            android:spinnerMode="dropdown" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_group"
+            app:layout_constraintStart_toEndOf="@+id/manage_student_class_card_view"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/manage_student_group_card_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darker_green2"
+            app:cardElevation="10dp"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintStart_toEndOf="@+id/manage_student_class_card_view"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <Spinner
+                android:id="@+id/manage_student_group_spinner"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:elevation="10dp"
+                android:popupBackground="@color/white"
+                android:spinnerMode="dropdown" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/manage_student_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/manage_student_group_card_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

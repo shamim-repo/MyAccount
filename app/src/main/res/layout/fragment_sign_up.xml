@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.signUp.SignUpFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_green">
+
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/circularRevealCardView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="-180dp"
+            android:alpha="1"
+            android:clickable="false"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/light_green"
+            app:cardCornerRadius="70dp"
+            app:cardElevation="10dp"
+            app:cardForegroundColor="#0C2B2222"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/my_account_logo"/>
+
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/mat_white"
+            android:elevation="10dp"
+            android:maxWidth="600dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/circularRevealCardView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/mat_white"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="25dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:boxBackgroundColor="#A4438E68"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="2dp"
+                    app:startIconDrawable="@drawable/baseline_person_24"
+                    app:hintTextColor="@color/black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/signup_full_name_edit_text_field1"
+                        android:hint="@string/full_name"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/signup_email_edit_text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:boxBackgroundColor="#A4438E68"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="2dp"
+                    app:startIconDrawable="@drawable/baseline_email_24"
+                    app:hintTextColor="@color/black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/signup_email_edit_text_field1"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/signup_password_edit_text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:boxBackgroundColor="#A4438E68"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="2dp"
+                    app:startIconDrawable="@drawable/baseline_password_24"
+                    app:hintTextColor="@color/black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/signup_password_edit_text_field1"
+                        android:hint="@string/password"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/signup_confirm_password_edit_text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:boxBackgroundColor="#A4438E68"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="2dp"
+                    app:startIconDrawable="@drawable/baseline_password_24"
+                    app:hintTextColor="@color/black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/signup_confirm_password_edit_text_field1"
+                        android:hint="@string/confirm_password"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signup_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="24dp"
+            android:maxWidth="400dp"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/right_arrow"
+            app:iconGravity="end"
+            android:backgroundTint="@color/light_red"
+            app:iconTintMode="multiply"
+            android:text="@string/signup"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

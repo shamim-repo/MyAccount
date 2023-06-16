@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mat_white">#e5e7ea</color>
+    <color name="mat_black">#727c8e</color>
+    <color name="light_red">#ff6969</color>
+    <color name="dark_green">#21d179</color>
+    <color name="light_green">#10e08d</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="green_fading">#A4438E68</color>
+    <color name="darker_green">#35815B</color>
+    <color name="darker_red">#D54D4D</color>
+    <color name="darker_green2">#4BBD50</color>
+    <color name="dark_blue">#04245E</color>
+</resources>

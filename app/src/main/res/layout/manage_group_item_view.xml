@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/mat_black"
+    app:cardCornerRadius="10dp"
+    android:layout_marginBottom="10dp"
+    android:elevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/manage_group_edit_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Class Name: "
+                    android:textColor="@color/mat_white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/manage_group_class_name_text_view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Class 2"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Group Name: "
+                    android:textColor="@color/mat_white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/manage_group_group_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Group 2"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time: "
+                    android:textColor="@color/mat_white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/manage_group_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2:30 pm to 3:30 pm"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Active Status: "
+                    android:textColor="@color/mat_white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/manage_group_active_status_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Active"
+                    android:textColor="@color/light_green"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/manage_group_edit_button"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="@color/light_red"
+            android:clickable="true"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/baseline_edit_24"
+            app:iconGravity="end"
+            app:iconTintMode="multiply"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/manage_group_delete_button"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="@color/light_red"
+            android:clickable="true"
+
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/baseline_delete_forever_24"
+            app:iconGravity="end"
+            app:iconTintMode="multiply"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

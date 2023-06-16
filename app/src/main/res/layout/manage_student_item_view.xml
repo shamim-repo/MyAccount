@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp"
+    android:layout_marginBottom="10dp"
+    android:backgroundTint="@color/dark_green">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "
+                android:textColor="@color/mat_white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/manage_student_full_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student 1"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/materialDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/materialDivider2"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/materialDivider3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/materialDivider2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID: "
+                android:textColor="@color/mat_white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/manage_student_id_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="000"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/materialDivider2"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone: "
+                android:textColor="@color/mat_white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/manage_student_contact_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="018********"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/materialDivider2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Class: "
+                android:textColor="@color/mat_white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/manage_student_class_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Class 1"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/materialDivider2"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Group: "
+                android:textColor="@color/mat_white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/manage_student_group_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Group 1"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/materialDivider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+
+        <TextView
+            android:id="@+id/manage_student_uid_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UID: 000"
+            android:textColor="#FFE500"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/manage_student_edit_button"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/light_red"
+            android:clickable="true"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/baseline_edit_24"
+            app:iconGravity="end"
+            app:iconTintMode="multiply"
+            app:layout_constraintEnd_toStartOf="@+id/manage_student_delete_button"
+            app:layout_constraintTop_toBottomOf="@+id/materialDivider3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/manage_student_detail_button"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/light_red"
+            android:clickable="true"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/baseline_info_24"
+            app:iconTintMode="multiply"
+            app:layout_constraintEnd_toStartOf="@+id/manage_student_edit_button"
+            app:layout_constraintTop_toBottomOf="@+id/materialDivider3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/manage_student_delete_button"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginEnd="4dp"
+            android:backgroundTint="@color/light_red"
+            android:clickable="true"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/baseline_delete_forever_24"
+            app:iconGravity="end"
+            app:iconTintMode="multiply"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialDivider2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

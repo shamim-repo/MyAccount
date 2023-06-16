@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.drawer.editProfile.EditProfileFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/mat_white"
+        android:elevation="10dp"
+        android:maxWidth="600dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circularRevealCardView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/mat_white"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_profile"
+                android:textColor="@color/light_green"
+                android:textSize="40sp"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/edit_profile_email_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/example_gmail_com"
+                android:textColor="@color/darker_green"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="italic" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:boxBackgroundColor="#A4438E68"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:hintTextColor="@color/black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edit_profile_full_name_edit_text_field1"
+                    android:hint="@string/full_name"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:boxBackgroundColor="#A4438E68"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/baseline_password_24"
+                app:hintTextColor="@color/black"
+                app:passwordToggleEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edit_profile_current_pass_edit_text_field"
+                    android:hint="@string/current_password"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signup_password_edit_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:boxBackgroundColor="#A4438E68"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/baseline_password_24"
+                app:hintTextColor="@color/black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edit_profile_password_edit_text_field"
+                    android:hint="@string/new_password"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signup_confirm_password_edit_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:boxBackgroundColor="#A4438E68"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/baseline_password_24"
+                app:hintTextColor="@color/black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edit_profile_confirm_password_edit_text_field"
+                    android:hint="@string/confirm_password"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_profile_update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/light_red"
+        android:maxWidth="400dp"
+        android:text="@string/update"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        app:cornerRadius="30dp"
+        app:icon="@drawable/baseline_done_24"
+        app:iconTintMode="multiply" />
+
+</FrameLayout>

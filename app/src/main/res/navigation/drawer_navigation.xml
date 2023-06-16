@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_dashboard">
+
+
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.dashBoard.DashboardFragment"
+        android:label="@string/dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/nav_attendance"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.attentence.MangeAttendanceFragment"
+        android:label="Attendance"
+        tools:layout="@layout/fragment_mange_attendance" />
+    <fragment
+        android:id="@+id/nav_payment"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.paymentAndDue.PaymentAndDueFragment"
+        android:label="@string/payment_due"
+        tools:layout="@layout/fragment_payment_and_due" />
+
+    <fragment
+        android:id="@+id/nav_add_class"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.classes.addClass.AddClassFragment"
+        android:label="@string/add_class"
+        tools:layout="@layout/fragment_add_class" />
+    <fragment
+        android:id="@+id/nav_manage_class"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.classes.manageClass.ManageClassFragment"
+        android:label="@string/manage_class"
+        tools:layout="@layout/fragment_manage_class" />
+
+    <fragment
+        android:id="@+id/nav_add_group"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.classes.addGroup.AddGroupFragment"
+        android:label="@string/add_group"
+        tools:layout="@layout/fragment_add_group" />
+    <fragment
+        android:id="@+id/nav_mange_group"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.classes.manageGroup.ManageGroupFragment"
+        android:label="@string/mange_group"
+        tools:layout="@layout/fragment_manage_group"/>
+
+    <fragment
+        android:id="@+id/nav_add_student"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.student.addStudent.AddStudentFragment"
+        android:label="@string/add_student"
+        tools:layout="@layout/fragment_add_student" />
+    <fragment
+        android:id="@+id/nav_manage_student"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.student.manageStudent.ManageStudentFragment"
+        android:label="@string/manage_student"
+        tools:layout="@layout/fragment_manage_student" />
+    <fragment
+        android:id="@+id/nav_edit_student"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.student.editStudent.EditStudentFragment"
+        android:label="Edit Student"
+        tools:layout="@layout/fragment_edit_student" />
+    <fragment
+        android:id="@+id/nav_add_fee"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.fee.addFee.AddFeeFragment"
+        android:label="@string/add_fee"
+        tools:layout="@layout/fragment_add_fee" />
+    <fragment
+        android:id="@+id/nav_manage_fee"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.fee.manageFee.ManageFeeFragment"
+        android:label="@string/manage_fee"
+        tools:layout="@layout/fragment_manage_fee" />
+
+    <fragment
+        android:id="@+id/nav_edit_fee"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.fee.editFee.EditFeeFragment"
+        android:label="Edit Fee"
+        tools:layout="@layout/fragment_edit_fee" />
+
+    <fragment
+        android:id="@+id/nav_setting"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.setting.SettingFragment"
+        android:label="@string/setting"
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.about.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/nav_edit_profile"
+        android:name="com.telentandtech.myaccount.ui.main.drawer.editProfile.EditProfileFragment"
+        android:label="@string/edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+
+</navigation>
