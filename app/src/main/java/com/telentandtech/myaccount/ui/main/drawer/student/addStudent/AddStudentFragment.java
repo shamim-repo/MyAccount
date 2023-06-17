@@ -55,6 +55,7 @@ public class AddStudentFragment extends Fragment {
     private Classe selectedClass;
     private Group selectedGroup;
     private Long selectedMonth;
+    private boolean insertSuccess=false;
 
     public static AddStudentFragment newInstance() {
         return new AddStudentFragment();
@@ -199,10 +200,13 @@ public class AddStudentFragment extends Fragment {
                         selectedGroup.getGroup_id(),selectedMonth, new Timestamp(System.currentTimeMillis()),
                         authUser.getUid());
                 mViewModel.insert(students);
+                insertSuccess=true;
             }
         });
         mViewModel.getInsertLiveData().observe(getViewLifecycleOwner(), studentResult -> {
             addButton.setEnabled(true);
+            if (!insertSuccess)
+                return;
             if (studentResult.isSuccessful()){
                 Toast.makeText(getContext(),studentResult.getMessage(),Toast.LENGTH_SHORT).show();
                 fullNameEditText.setText("");
@@ -216,6 +220,7 @@ public class AddStudentFragment extends Fragment {
 
                 mViewModel.getStudentCount(authUser.getUid(),selectedClass.getClass_id(),
                         selectedGroup.getGroup_id());
+                insertSuccess=false;
 
             }else {
                 Toast.makeText(getContext(),studentResult.getMessage(),Toast.LENGTH_SHORT).show();

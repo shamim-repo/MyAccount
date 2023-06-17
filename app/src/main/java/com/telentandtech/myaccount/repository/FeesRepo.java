@@ -7,8 +7,12 @@ import android.os.Looper;
 import androidx.lifecycle.MutableLiveData;
 
 import com.telentandtech.myaccount.database.dao.FeesDao;
+import com.telentandtech.myaccount.database.dao.PaymentDao;
+import com.telentandtech.myaccount.database.dao.StudentsDao;
 import com.telentandtech.myaccount.database.dataBase.AccountDatabase;
 import com.telentandtech.myaccount.database.entityes.Fees;
+import com.telentandtech.myaccount.database.entityes.Payments;
+import com.telentandtech.myaccount.database.entityes.Students;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameIdListResult;
 import com.telentandtech.myaccount.database.resultObjects.FeesListResult;
@@ -16,14 +20,18 @@ import com.telentandtech.myaccount.database.resultObjects.FeesResult;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameIDListResult;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class FeesRepo {
+
     private AccountDatabase db;
     private FeesDao feesDao;
+    private PaymentDao paymentDao;
+    private StudentsDao studentDao;
     private MutableLiveData<ClassNameIdListResult> classNameIdListLiveData;
     private MutableLiveData<GroupNameIDListResult> groupNameIdListLiveData;
     private MutableLiveData<FeesResult> feesLiveData;
@@ -36,6 +44,9 @@ public class FeesRepo {
     public FeesRepo(Application application) {
         this.db = AccountDatabase.getInstance(application);
         this.feesDao = db.feesDao();
+        this.paymentDao = db.paymentsDao();
+        this.studentDao = db.studentsDao();
+
         this.classNameIdListLiveData = new MutableLiveData<>();
         this.groupNameIdListLiveData = new MutableLiveData<>();
         this.feesLiveData = new MutableLiveData<>();
@@ -102,6 +113,7 @@ public class FeesRepo {
     public void insertFees(Fees fees) {
         taskRunner.executeAsync(new InsertFeesCallable(fees), result -> {
             if (result != null) {
+
                 feesInsertLiveData.postValue(new FeesResult(result, true, "Success"));
             } else {
                 feesInsertLiveData.postValue(new FeesResult(null, false, "No Data Found"));
@@ -185,11 +197,33 @@ public class FeesRepo {
         @Override
         public Fees call() throws Exception {
             feesDao.insertFees(fees);
+            List<Students> studentsList=studentDao.getStudentsByGroupIdStartingMonth(
+                    fees.getUid(),fees.getGroup_id(),fees.getFee_month());
+            for(Students students:studentsList){
+                Payments payments=new Payments();
+
+                payments.setClass_id(students.getClass_id());
+                payments.setClass_name(students.getClass_name());
+                payments.setGroup_id(students.getGroup_id());
+                payments.setGroup_name(students.getGroup_name());
+                payments.setStudent_id(students.getStudent_id());
+                payments.setId(students.getId());
+                payments.setUid(students.getUid());
+                payments.setPayment_status(false);
+                payments.setPayment_amount(fees.getFee_amount());
+                payments.setGuardian_name(students.getGuardian_name());
+                payments.setPhone(students.getPhone());
+                payments.setStudent_name(students.getFull_name());
+                payments.setPayment_month(fees.getFee_month());
+                payments.setFees_id(fees.getFee_id());
+                paymentDao.insertPayment(payments);
+            }
             return fees;
         }
     }
 
     private class UpdateFeesCallable implements Callable<Fees> {
+
         private Fees fees;
 
         public UpdateFeesCallable(Fees fees) {
@@ -199,6 +233,12 @@ public class FeesRepo {
         @Override
         public Fees call() throws Exception {
             feesDao.updateFees(fees);
+            List<Payments> paymentsList=paymentDao.getPaymentsByPaymentMonthFeeId(fees.getUid(),fees.getGroup_id(),fees.getFee_month(),fees.getFee_id());
+            for(Payments payments:paymentsList){
+                payments.setPayment_amount(fees.getFee_amount());
+                payments.setPayment_month(fees.getFee_month());
+                paymentDao.updatePayment(payments);
+            }
             return fees;
         }
     }

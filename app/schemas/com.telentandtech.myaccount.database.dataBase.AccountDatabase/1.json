@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4192547c4b4fe05753f8dd7a45ad66af",
+    "identityHash": "35c3a2368706b2d9ff1b16c7788f5ce1",
     "entities": [
       {
         "tableName": "attendance",
@@ -334,11 +334,17 @@
       },
       {
         "tableName": "payments",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`payment_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `class_name` TEXT, `class_id` INTEGER NOT NULL, `group_name` TEXT, `group_id` INTEGER NOT NULL, `payment_amount` REAL, `payment_status` INTEGER, `payment_month` INTEGER NOT NULL, `payment_timestamp` INTEGER NOT NULL, `student_id` INTEGER NOT NULL, `id` INTEGER NOT NULL, `student_name` TEXT, `guardian_name` TEXT, `phone` TEXT, `uid` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`payment_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fees_id` INTEGER NOT NULL, `class_name` TEXT, `class_id` INTEGER NOT NULL, `group_name` TEXT, `group_id` INTEGER NOT NULL, `payment_amount` REAL, `payment_status` INTEGER, `payment_month` INTEGER NOT NULL, `payment_timestamp` INTEGER, `student_id` INTEGER NOT NULL, `id` TEXT, `student_name` TEXT, `guardian_name` TEXT, `phone` TEXT, `uid` TEXT)",
         "fields": [
           {
             "fieldPath": "payment_id",
             "columnName": "payment_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fees_id",
+            "columnName": "fees_id",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -388,7 +394,7 @@
             "fieldPath": "payment_timestamp",
             "columnName": "payment_timestamp",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "student_id",
@@ -399,8 +405,8 @@
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "student_name",
@@ -423,8 +429,8 @@
           {
             "fieldPath": "uid",
             "columnName": "uid",
-            "affinity": "INTEGER",
-            "notNull": true
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -582,7 +588,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4192547c4b4fe05753f8dd7a45ad66af')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '35c3a2368706b2d9ff1b16c7788f5ce1')"
     ]
   }
 }

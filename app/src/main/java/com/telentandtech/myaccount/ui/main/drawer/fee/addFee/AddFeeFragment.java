@@ -49,6 +49,7 @@ public class AddFeeFragment extends Fragment {
     private Classe selectedClass;
     private Group selectedGroup;
     private Long selectedMonth;
+    private boolean insertStatus=false;
 
     public static AddFeeFragment newInstance() {
         return new AddFeeFragment();
@@ -162,10 +163,13 @@ public class AddFeeFragment extends Fragment {
                         authUser.getUid()
                 );
                 mViewModel.insertFees(fees);
+                insertStatus=true;
             }
         });
         mViewModel.getInsertFeesLiveData().observe(getViewLifecycleOwner(), feesResult -> {
             addFeeButton.setEnabled(true);
+            if (!insertStatus)
+                return;
             if (feesResult.isSuccessful()){
                 Toast.makeText(getContext(),feesResult.getMessage(),Toast.LENGTH_SHORT).show();
                 addFeeAmountEditText.setText("");

@@ -23,8 +23,8 @@ public interface StudentsDao {
     void updateStudents(Students students);
     @Query("SELECT * FROM 'students' WHERE uid=:uid order by created_at  DESC")
     List<Students> getAllStudents(String uid);
-    @Query("SELECT * FROM 'students' WHERE uid=:uid AND group_id = :group_id order by created_at  DESC")
-    List<Students> getStudentsByGroupId(String uid,long group_id);
+    @Query("SELECT * FROM 'students' WHERE uid=:uid AND group_id = :group_id AND starting_date>=:starting_month order by created_at  DESC")
+    List<Students> getStudentsByGroupIdStartingMonth(String uid,long group_id,long starting_month);
     @Query("SELECT * FROM 'students' WHERE uid=:uid AND class_id = :class_id AND group_id " +
             "=:group_id order by CAST(id AS INTEGER)  DESC")
     List<Students> getStudentsByClassIdGroupId(String uid,long class_id,long group_id);
@@ -36,6 +36,7 @@ public interface StudentsDao {
     List<GroupNameID> getDistinctGroupNames(String uid, long class_id);
     @Query("SELECT COUNT(*) FROM 'students' WHERE uid=:uid AND class_id=:class_id AND group_id=:group_id")
     Integer getStudentCount(String uid, long class_id,long group_id);
+
 
 
 }

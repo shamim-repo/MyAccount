@@ -42,4 +42,8 @@ public class DateObj {
         return new SimpleDateFormat("MMM yyyy").format(date);
     }
 
+    public static String timestampToDateString(Timestamp date){
+        return new SimpleDateFormat("dd MMM yyyy").format(date);
+    }
+
 }

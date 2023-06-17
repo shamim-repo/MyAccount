@@ -32,7 +32,7 @@ import com.telentandtech.myaccount.database.entityes.User;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Attendance.class, Classe.class, Fees.class, Group.class, Lesion.class,
+@Database(entities = {Attendance.class, Classe.class, Fees.class, Group.class,
         Payments.class, Students.class, User.class}, version = 1,exportSchema = true)
 @TypeConverters({Converter.class})
 public abstract class AccountDatabase extends RoomDatabase {

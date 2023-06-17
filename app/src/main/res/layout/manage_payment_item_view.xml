@@ -6,8 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp"
+    android:id="@+id/payment_card_view"
     android:layout_marginBottom="10dp"
-    android:backgroundTint="@color/mat_black">
+    android:backgroundTint="@color/darker_green">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="Name: "
                 android:textColor="@color/mat_white"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/payment_student_full_name_text_view"
@@ -37,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="Student 1"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
 
@@ -64,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:text="ID: "
                 android:textColor="@color/mat_white"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/payment_student_id_text_view"
@@ -72,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="000"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -89,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:text="Phone: "
                 android:textColor="@color/mat_white"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/payment_contact_text_view"
@@ -97,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:text="018********"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
 
@@ -115,31 +116,32 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Month: "
+                android:text="Month :"
                 android:textColor="@color/mat_white"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/payment_date_text_view"
+                android:id="@+id/payment_month_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Month 2023"
+                android:text="june 2023"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout10"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fee Amount: "
+                android:text="Fee Amount :"
                 android:textColor="@color/mat_white"
                 android:textSize="20sp" />
 
@@ -147,35 +149,28 @@
                 android:id="@+id/payment_amount_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Month 2023"
+                android:text="1000"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/linearLayout9"
+            android:id="@+id/linearLayout11"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
 
             <TextView
+                android:id="@+id/paid_date_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Payment Status: "
-                android:textColor="@color/mat_white"
-                android:textSize="25sp" />
-
-
-            <ImageView
-                android:id="@+id/payment_status_image_view"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/baseline_dangerous_24" />
-
-
+                android:text="Payment Date:20 jul 2023"
+                android:textColor="#FFEB3B"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -183,38 +178,37 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
-            android:layout_marginLeft="15dp"
-            android:backgroundTint="@color/light_red"
+            android:backgroundTint="@color/light_green"
             android:clickable="true"
             android:text="Pay"
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:cornerRadius="20dp"
             app:icon="@drawable/baseline_payments_24"
             app:iconGravity="end"
             app:iconTintMode="multiply"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout9" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/payment_edit_button"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
-            android:layout_marginLeft="15dp"
-            android:backgroundTint="@color/light_green"
+            android:backgroundTint="@color/light_red"
             android:clickable="true"
-            android:text="edit"
+            android:text="Un pay"
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:cornerRadius="20dp"
             app:icon="@drawable/baseline_edit_24"
             app:iconGravity="end"
             app:iconTintMode="multiply"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout9" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

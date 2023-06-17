@@ -89,22 +89,6 @@
             android:popupBackground="@color/white"
             android:spinnerMode="dropdown"/>
         </androidx.cardview.widget.CardView>
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/payment_filter_button"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/light_red"
-            android:clickable="true"
-            android:text="@string/filter"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:layout_margin="5dp"
-            app:cornerRadius="30dp"
-            app:icon="@drawable/baseline_filter_list_24"
-            app:iconGravity="start"
-            app:iconTintMode="multiply"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/payment_class_card_view" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_email_edit_text_field66"
@@ -118,10 +102,11 @@
             app:layout_constraintEnd_toStartOf="@+id/payment_pick_date_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/payment_class_card_view"
-            app:startIconDrawable="@drawable/baseline_calendar_month_24">
+            app:startIconDrawable="@drawable/baseline_calendar_month_24"
+            android:layout_marginRight="15dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/manage_student_start_date_edit_text"
+                android:id="@+id/payment_due_month_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Month Year"
@@ -135,22 +120,21 @@
             android:layout_height="60dp"
             android:backgroundTint="@color/green_fading"
             android:clickable="true"
-            android:layout_marginLeft="10dp"
             android:text="@string/pick_date"
             android:textColor="@color/white"
             android:textSize="10sp"
             app:cornerRadius="30dp"
-            app:layout_constraintEnd_toStartOf="@+id/payment_filter_button"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/payment_class_card_view" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/manage_group_recycler_view"
+            android:id="@+id/payment_due_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/payment_filter_button" />
+            app:layout_constraintTop_toBottomOf="@+id/payment_pick_date_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

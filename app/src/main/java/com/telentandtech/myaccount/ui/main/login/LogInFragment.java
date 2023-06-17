@@ -112,7 +112,9 @@ public class LogInFragment extends Fragment {
 
     private void gotoDrawerActivity(){
         Intent intent=new Intent(getContext(), DrawerActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        getActivity().finish();
     }
 
     private void setAuthStatusPreference(User user){

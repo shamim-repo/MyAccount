@@ -13,12 +13,15 @@ import androidx.core.content.SharedPreferencesKt;
 import androidx.preference.PreferenceManager;
 
 import com.telentandtech.myaccount.core.DataClass;
+import com.telentandtech.myaccount.database.dao.UserDao;
+import com.telentandtech.myaccount.database.dataBase.AccountDatabase;
 import com.telentandtech.myaccount.database.entityes.User;
 import com.telentandtech.myaccount.ui.main.login.LogInFragment;
 
 public class LogInActivity extends AppCompatActivity {
 
     private User authUser;
+    private AccountDatabase accountDatabase;
 
 
     @Override
@@ -34,6 +37,10 @@ public class LogInActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else {
+
+            UserDao userDao = AccountDatabase.getInstance(getApplicationContext()).userDao();
+            userDao.getUsers();
+
 
             setContentView(R.layout.activity_log_in);
             if (savedInstanceState == null) {

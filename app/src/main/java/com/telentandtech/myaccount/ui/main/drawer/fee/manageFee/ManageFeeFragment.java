@@ -60,6 +60,8 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
     private List<Fees> feesList;
     private int lastEditedPosition;
     private int lastDeletedPosition;
+    private boolean isEdit = false;
+    private boolean isDelete = false;
 
 
     public static ManageFeeFragment newInstance() {
@@ -187,6 +189,7 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
                 editFees(feesList.get(position));
                 break;
             case "delete":
+                isDelete = true;
                 lastDeletedPosition = position;
                 mViewModel.deleteFee(feesList.get(position));
                 break;
@@ -238,6 +241,7 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
                 feeAmountEditText.setError("Enter Fee Amount");
                 return;
             }
+            isEdit = true;
             fees.setFee_amount(Double.parseDouble(feeAmountEditText.getText().toString()));
             mViewModel.updateFee(fees);
         });

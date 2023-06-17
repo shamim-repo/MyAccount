@@ -1,34 +1,40 @@
 package com.telentandtech.myaccount.database.entityes;
 
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.sql.Timestamp;
 
 
 @Entity(tableName = "payments")
 public class Payments {
     @PrimaryKey(autoGenerate = true)
     private long payment_id;
+    private long fees_id;
     private String class_name;
     private long class_id;
-
     private String group_name;
     private long group_id;
     private Double payment_amount;
     private Boolean payment_status;
     private long payment_month;
-    private long payment_timestamp;
+    @Nullable
+    private Timestamp payment_timestamp;
     private long student_id;
-    private long id;
+    private String id;
     private String student_name;
     private String guardian_name;
     private String phone;
-    private long uid;
+    private String uid;
 
-    public Payments(long payment_id, String class_name, long class_id, String group_name, long group_id,
-                    Double payment_amount, Boolean payment_status, long payment_month, long payment_timestamp,
-                    long student_id, long id, String student_name, String guardian_name, String phone, long uid) {
+
+    public Payments(long payment_id, long fees_id, String class_name, long class_id, String group_name, long group_id,
+                    Double payment_amount, Boolean payment_status, long payment_month, Timestamp payment_timestamp,
+                    long student_id, String id, String student_name, String guardian_name, String phone, String uid) {
         this.payment_id = payment_id;
+        this.fees_id = fees_id;
         this.class_name = class_name;
         this.class_id = class_id;
         this.group_name = group_name;
@@ -46,9 +52,22 @@ public class Payments {
     }
 
     @Ignore
+    public Payments() {
+    }
+
+    public long getFees_id() {
+        return fees_id;
+    }
+
+    public void setFees_id(long fees_id) {
+        this.fees_id = fees_id;
+    }
+
+    @Ignore
     public Payments(String class_name, long class_id, String group_name, long group_id, Double payment_amount,
-                    Boolean payment_status, long payment_month, long payment_timestamp,
-                    long student_id, long id, String student_name, String guardian_name, String phone, long uid) {
+                    Boolean payment_status, long payment_month, Timestamp payment_timestamp,
+                    long student_id, String id, String student_name, String guardian_name, String phone, String uid) {
+
         this.class_name = class_name;
         this.class_id = class_id;
         this.group_name = group_name;
@@ -81,11 +100,11 @@ public class Payments {
         this.group_id = group_id;
     }
 
-    public long getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(long uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
@@ -137,11 +156,11 @@ public class Payments {
         this.student_id = student_id;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -169,11 +188,11 @@ public class Payments {
         this.phone = phone;
     }
 
-    public long getPayment_timestamp() {
+    public Timestamp getPayment_timestamp() {
         return payment_timestamp;
     }
 
-    public void setPayment_timestamp(long payment_timestamp) {
+    public void setPayment_timestamp(Timestamp payment_timestamp) {
         this.payment_timestamp = payment_timestamp;
     }
 
