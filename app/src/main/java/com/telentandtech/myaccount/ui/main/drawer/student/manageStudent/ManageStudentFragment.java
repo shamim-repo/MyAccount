@@ -8,8 +8,10 @@ import static com.telentandtech.myaccount.core.DataClass.classNameIDListToString
 import static com.telentandtech.myaccount.core.DataClass.groupListToIdNameStringList;
 import static com.telentandtech.myaccount.core.DataClass.groupNameIDListTOStringArray;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -20,6 +22,8 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
+import android.print.PrintManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +36,7 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.telentandtech.myaccount.R;
@@ -41,9 +46,14 @@ import com.telentandtech.myaccount.database.entityes.Students;
 import com.telentandtech.myaccount.database.entityes.User;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
+import com.telentandtech.myaccount.DocumentUtils.CSVUtils;
+import com.telentandtech.myaccount.DocumentUtils.CSVtoPDFConverter;
+import com.telentandtech.myaccount.DocumentUtils.PdfDocumentAdapter;
 import com.telentandtech.myaccount.ui.main.drawer.student.manageStudent.recycleView.ManageStudentAdapter;
 
+import java.io.File;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManageStudentFragment extends Fragment implements OnClickListener {
@@ -56,6 +66,7 @@ public class ManageStudentFragment extends Fragment implements OnClickListener {
     private ClassNameId selectedClassNameId;
     private GroupNameID selectedGroupNameID;
     private List<Students> studentsList;
+    private ExtendedFloatingActionButton printFab;
     private int lastEditedPosition;
     private int lastDeletedPosition;
     private boolean snekberDelete=false;
@@ -66,6 +77,9 @@ public class ManageStudentFragment extends Fragment implements OnClickListener {
     private long groupId;
 
     private User authUser;
+    private ActivityResultLauncher<String> requestPermissionLauncher;
+
+
 
     public static ManageStudentFragment newInstance() {
         return new ManageStudentFragment();
@@ -99,6 +113,7 @@ public class ManageStudentFragment extends Fragment implements OnClickListener {
         classSpinner = view.findViewById(R.id.manage_student_class_spinner);
         groupSpinner = view.findViewById(R.id.manage_student_group_spinner);
         recyclerView = view.findViewById(R.id.manage_student_recycler_view);
+        printFab = view.findViewById(R.id.manage_student_print_fab);
 
 
         mViewModel.getClassNameIDList(authUser.getUid());
@@ -193,7 +208,70 @@ public class ManageStudentFragment extends Fragment implements OnClickListener {
             }
         });
 
+        printFab.setOnClickListener(v -> {
+
+            if (studentsList !=null && studentsList.size() > 0) {
+                createPrintDocument(studentsList);
+            } else {
+                Toast.makeText(getContext(), "No Student Found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
+    private void createPrintDocument(List<Students> studentsList) {
+        MaterialAlertDialogBuilder builder=
+                new MaterialAlertDialogBuilder(getContext())
+                        .setTitle("Print Student List")
+                        //.setMessage("Student list will be saved in this location\n"+dir.getPath())
+                        .setMessage("Are you sure you want to print student list?")
+                        .setPositiveButton("Print", (dialog, which) -> {
+                            ArrayList<List<String>> rows = new ArrayList<>();
+                            List<String> list1 = new ArrayList<String>();
+                            list1.add("UID");
+                            list1.add("Name");
+                            list1.add("ID");
+                            list1.add("Class");
+                            list1.add("Group");
+                            list1.add("Collage");
+                            list1.add("Phone");
+                            rows.add(list1);
+
+                            for (Students students : studentsList) {
+                                List<String> list = new ArrayList<String>();
+                                list.add(String.valueOf(students.getStudent_id()));
+                                list.add(students.getFull_name());
+                                list.add(students.getId());
+                                list.add(students.getClass_name());
+                                list.add(students.getGroup_name());
+                                list.add(students.getSchool_name());
+                                list.add(students.getPhone());
+
+                                rows.add(list);
+                            }
+                            ArrayList<String[]> list2 = new ArrayList<>();
+
+                            for (List<String> list : rows) {
+                                String[] strings = new String[list.size()];
+                                strings = list.toArray(strings);
+                                list2.add(strings);
+                            }
+                            File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+                            File dir=new File(directory.getAbsolutePath()+"/MyAccount");
+
+                            File fileCsv = new File(getContext().getExternalFilesDir(null), "student.csv");
+                            CSVUtils.writeListToCSV(list2, fileCsv.getPath());
+                            CSVtoPDFConverter.convertCSVtoPDF(fileCsv.getPath(), "student.pdf", 7);
+                            dir=new File(dir.getAbsolutePath(),"student.pdf");
+
+                            PdfDocumentAdapter documentAdapter = new PdfDocumentAdapter(getContext(),dir.getPath());
+                            PrintManager printManager = (PrintManager) getActivity().getSystemService(Context.PRINT_SERVICE);
+                            String jobName = getString(R.string.app_name) + " Print Student List";
+                            printManager.print(jobName, documentAdapter, null);
+                        })
+                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+
 
     @Override
     public void onClick(int position, String option) {
@@ -419,5 +497,7 @@ public class ManageStudentFragment extends Fragment implements OnClickListener {
         builder.setPositiveButton("Ok", (dialog, which) -> dialog.dismiss());
         builder.show();
     }
+
+
 
 }

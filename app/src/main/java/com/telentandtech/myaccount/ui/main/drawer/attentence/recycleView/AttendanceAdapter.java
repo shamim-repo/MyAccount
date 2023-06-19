@@ -19,7 +19,7 @@ import java.util.List;
 
 public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.ViewHolder> {
 
-    private List<Attendance> attendanceList;
+    public List<Attendance> attendanceList;
     private OnClickListener onClickListener;
 
     public AttendanceAdapter(List<Attendance> attendanceList, OnClickListener onClickListener) {

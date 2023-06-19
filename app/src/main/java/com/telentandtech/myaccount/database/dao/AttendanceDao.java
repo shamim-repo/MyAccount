@@ -9,8 +9,10 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.telentandtech.myaccount.database.entityes.Attendance;
+import com.telentandtech.myaccount.database.resultObjects.AttendanceCount;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
+import com.telentandtech.myaccount.database.resultObjects.PaidUnpaidCountResult;
 
 
 import java.sql.Timestamp;
@@ -37,5 +39,11 @@ public interface AttendanceDao {
     List<ClassNameId> getClassNameIDList(String uid);
     @Query("SELECT DISTINCT group_id,group_name FROM 'attendance' WHERE uid=:uid AND class_id=:class_id order by group_id DESC")
     List<GroupNameID> getGroupNameIDList(String uid, long class_id);
+
+    //get attendance total count attendance =1 count and  attendance=0 count by uid
+    @Query("SELECT COUNT(*) AS total_count, SUM(CASE WHEN attended = 1 THEN 1 ELSE 0 END)"+
+            " AS present_count, SUM(CASE WHEN attended = 0 THEN 1 ELSE 0 END) AS absent_count " +
+            "FROM attendance WHERE uid=:uid")
+    AttendanceCount getAttendanceCount(String uid);
 
 }

@@ -3,6 +3,7 @@ package com.telentandtech.myaccount.repository;
 import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -127,8 +128,10 @@ public class PaymentRepo {
     }
 
     public void getClassIdName(String uid){
+        Log.d("PaymentRepo","getClassIdName");
         taskRunner.executeAsync(new GetClassNameIdCallable(uid), result -> {
             if (result != null) {
+                Log.d("PaymentRepo","getClassIdName result "+result.size());
                 classNameIdMutableLiveData.postValue( new ClassNameIdListResult(result,true,"Class List"));
             } else {
                 classNameIdMutableLiveData.postValue(new ClassNameIdListResult(null,false,"Error"));
@@ -146,6 +149,28 @@ public class PaymentRepo {
         });
     }
 
+    public void getAllPayment(String uid){
+        taskRunner.executeAsync(new GetAllPaymentsCallable(uid), result -> {
+            if (result != null) {
+                paymentsListResultMutableLiveData.postValue(new PaymentsListResult(result,true,"Payment List"));
+            } else {
+                paymentsListResultMutableLiveData.postValue(new PaymentsListResult(null,false,"Error"));
+            }
+        });
+    }
+
+    private class GetAllPaymentsCallable implements Callable<List<Payments>> {
+        private String uid;
+
+        public GetAllPaymentsCallable(String uid) {
+            this.uid = uid;
+        }
+
+        @Override
+        public List<Payments> call() throws Exception {
+            return paymentDao.getAllPayments(uid);
+        }
+    }
 
     private class InsertPaymentCallable implements Callable<Payments> {
         private Payments payments;

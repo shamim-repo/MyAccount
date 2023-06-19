@@ -50,8 +50,8 @@
                     android:backgroundTint="@color/darker_green2">
 
                 <Spinner
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="50dp"
                     android:id="@+id/edit_group_class_spinner"
                     android:elevation="10dp"
                     android:popupBackground="@color/white"
@@ -112,7 +112,7 @@
 
                         <TextView
                             android:id="@+id/time_from_text_view"
-                            android:layout_width="120dp"
+                            android:layout_width="@dimen/_100sdp"
                             android:layout_height="wrap_content"
                             android:background="@color/green_fading"
                             android:gravity="center"
@@ -122,7 +122,7 @@
                         <RadioGroup
                             android:clickable="false"
                             android:id="@+id/time_from_radio_group"
-                            android:layout_width="120dp"
+                            android:layout_width="@dimen/_100sdp"
                             android:layout_height="30dp"
                             android:layout_marginTop="5dp"
                             android:background="@drawable/pink_out_line"
@@ -164,7 +164,7 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/time_from_button"
-                            android:layout_width="120dp"
+                            android:layout_width="@dimen/_100sdp"
                             android:layout_height="50dp"
                             android:backgroundTint="@color/light_red"
                             android:clickable="true"
@@ -188,7 +188,7 @@
 
                         <TextView
                             android:id="@+id/time_to_text_view"
-                            android:layout_width="120dp"
+                            android:layout_width="@dimen/_100sdp"
                             android:layout_height="wrap_content"
                             android:background="@color/green_fading"
                             android:gravity="center"
@@ -198,7 +198,7 @@
                         <RadioGroup
                             android:clickable="false"
                             android:id="@+id/time_to_to_group"
-                            android:layout_width="120dp"
+                            android:layout_width="@dimen/_100sdp"
                             android:layout_height="30dp"
                             android:layout_marginTop="5dp"
                             android:background="@drawable/pink_out_line"
@@ -240,7 +240,7 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/time_to_button"
-                            android:layout_width="120dp"
+                            android:layout_width="@dimen/_100sdp"
                             android:layout_height="50dp"
                             android:backgroundTint="@color/light_red"
                             android:clickable="true"

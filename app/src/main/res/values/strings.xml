@@ -66,7 +66,7 @@
     <string name="group_name_">Group Name: </string>
     <string name="fee_amount">Fee Amount: </string>
     <string name="id">ID</string>
-    <string name="school_name">School Name</string>
+    <string name="school_name">Collage Name</string>
     <string name="guardian_name">Guardian Name</string>
     <string name="pick_date">Pick Date</string>
     <string name="starting_date">Starting Date</string>
@@ -80,6 +80,10 @@
     <string name="group">Group</string>
     <string name="active_status">Active Status</string>
     <string name="month">Month: </string>
+    <string name="export_payment_list_microsoft_excel_or_pdf">Export payment list to microsoft excel or pdf.</string>
+    <string name="export_payment">Export Payment</string>
+
+
 
     <string-array name="select_class">
         <item>@string/select_class</item>
@@ -93,6 +97,5 @@
         <item>Paid</item>
         <item>Due</item>
     </string-array>
-
 
 </resources>

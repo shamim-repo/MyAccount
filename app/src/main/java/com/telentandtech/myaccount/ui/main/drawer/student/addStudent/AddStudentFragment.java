@@ -161,9 +161,9 @@ public class AddStudentFragment extends Fragment {
                     else
                         count += selectedGroup.getGroup_id();
                     if (integer < 10)
-                        count += "0" + integer+1;
+                        count += "0" + (integer+1);
                     else
-                        count += integer+1;
+                        count += (integer+1);
 
                     idEditText.setText(count);
                 }

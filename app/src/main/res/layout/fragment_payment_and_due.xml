@@ -29,7 +29,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3">
         <Spinner
             android:id="@+id/payment_class_spinner"
-            android:layout_width="120dp"
+            android:layout_width="@dimen/_95sdp"
             android:layout_height="40dp"
             android:elevation="10dp"
             android:popupBackground="@color/white"
@@ -38,11 +38,10 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/select_group"
-            app:layout_constraintStart_toEndOf="@+id/payment_class_card_view"
+            app:layout_constraintStart_toStartOf="@+id/payment_group_card_view"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
@@ -56,7 +55,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4">
         <Spinner
             android:id="@+id/payment_group_spinner"
-            android:layout_width="120dp"
+            android:layout_width="@dimen/_95sdp"
             android:layout_height="40dp"
             android:elevation="10dp"
             android:popupBackground="@color/white"
@@ -68,26 +67,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/payment_status"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintStart_toEndOf="@+id/payment_group_card_view"
+            app:layout_constraintStart_toStartOf="@+id/payment_status_card_view"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/payment_status_card_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardElevation="10dp"
             android:backgroundTint="@color/darker_green2"
+            app:cardElevation="10dp"
+            android:layout_marginLeft="10dp"
             app:layout_constraintStart_toEndOf="@+id/payment_group_card_view"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintEnd_toEndOf="parent" >
-        <Spinner
-            android:id="@+id/payment_payment_status_spinner"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:elevation="10dp"
-            android:popupBackground="@color/white"
-            android:spinnerMode="dropdown"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+            <Spinner
+                android:id="@+id/payment_payment_status_spinner"
+                android:layout_width="@dimen/_95sdp"
+                android:layout_height="40dp"
+                android:elevation="10dp"
+                android:popupBackground="@color/white"
+                android:spinnerMode="dropdown" />
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -135,6 +134,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/payment_pick_date_button" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/payment_print_fab"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/light_red"
+            app:icon="@drawable/baseline_print_24"
+            app:iconSize="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

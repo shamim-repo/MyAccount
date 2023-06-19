@@ -5,10 +5,37 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.drawer.about.AboutFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+    <ImageView
+
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@mipmap/ic_launcher_foreground"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        />
+            <TextView
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:fontFamily="serif-monospace"
+                android:textStyle="bold"
+                android:text="@string/app_name"/>
     <TextView
+        android:id="@+id/about_textView"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:textSize="15sp"/>
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

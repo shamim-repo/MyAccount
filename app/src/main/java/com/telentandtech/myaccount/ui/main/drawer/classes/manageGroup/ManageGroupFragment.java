@@ -108,6 +108,7 @@ public class ManageGroupFragment extends Fragment implements OnClickListener {
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         getGroupList(result.getClassNameIdList().get(position).getClass_id(),
                                 activeSpinner.getSelectedItem().toString());
+                        recyclerView.setAdapter(null);
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
@@ -125,6 +126,7 @@ public class ManageGroupFragment extends Fragment implements OnClickListener {
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         getGroupList(result.getClassNameIdList().get(classSpinner.getSelectedItemPosition()).getClass_id(),
                                 activeSpinner.getSelectedItem().toString());
+                        recyclerView.setAdapter(null);
                     }
 
                     @Override
@@ -194,6 +196,7 @@ public class ManageGroupFragment extends Fragment implements OnClickListener {
                 Toast.makeText(getContext(), group.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
 
     }
 

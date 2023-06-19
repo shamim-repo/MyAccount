@@ -7,9 +7,13 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.telentandtech.myaccount.core.DateObj;
+import com.telentandtech.myaccount.database.dao.PaymentDao;
 import com.telentandtech.myaccount.database.dao.StudentsDao;
 import com.telentandtech.myaccount.database.dataBase.AccountDatabase;
+import com.telentandtech.myaccount.database.entityes.Payments;
 import com.telentandtech.myaccount.database.entityes.Students;
+import com.telentandtech.myaccount.database.resultObjects.AddStudentPaymentList;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameIdListResult;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
@@ -17,6 +21,7 @@ import com.telentandtech.myaccount.database.resultObjects.GroupNameIDListResult;
 import com.telentandtech.myaccount.database.resultObjects.StudentListResult;
 import com.telentandtech.myaccount.database.resultObjects.StudentResult;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
@@ -25,6 +30,7 @@ import java.util.concurrent.Executors;
 public class StudentRepo {
     private AccountDatabase db;
     private StudentsDao studentsDao;
+    private PaymentDao paymentDao;
     private TaskRunner taskRunner;
 
     private MutableLiveData<StudentResult> studentsMutableLiveData;
@@ -48,6 +54,7 @@ public class StudentRepo {
         classNameIdListMutableLiveData = new MutableLiveData<>();
         groupNameIDListMutableLiveData = new MutableLiveData<>();
         studentCountMutableLiveData = new MutableLiveData<>();
+        paymentDao = db.paymentsDao();
         taskRunner = new TaskRunner();
     }
     public MutableLiveData<StudentResult> getStudentsMutableLiveData() {
@@ -161,6 +168,62 @@ public class StudentRepo {
         });
     }
 
+
+    public void getAllStudents(String uid){
+        taskRunner.executeAsync(new GetAllStudents(uid),result -> {
+            if (result != null && result.size() > 0){
+                studentListMutableLiveData.postValue(new
+                        StudentListResult(result,true,"Getting Student List Successfully"));
+            }else {
+                studentListMutableLiveData.postValue(new
+                        StudentListResult(null,false,"Getting Student List Failed"));
+            }
+        });
+    }
+
+    public void getStudentByYear(String uid, long fYear,long lYear){
+        taskRunner.executeAsync(new GetStudentByYear(uid,fYear,lYear),result -> {
+            if (result != null && result.size() > 0){
+                studentListMutableLiveData.postValue(new
+                        StudentListResult(result,true,"Getting Student List Successfully"));
+            }else {
+                studentListMutableLiveData.postValue(new
+                        StudentListResult(null,false,"Getting Student List Failed"));
+            }
+        });
+    }
+
+
+    private class GetStudentByYear implements Callable<List<Students>> {
+        private String uid;
+        private long fYear;
+        private long lYear;
+
+        public GetStudentByYear(String uid, long fYear, long lYear) {
+            this.uid = uid;
+            this.fYear = fYear;
+            this.lYear = lYear;
+        }
+
+        @Override
+        public List<Students> call() throws Exception {
+            return studentsDao.getStudentByYear(uid,fYear,lYear);
+        }
+    }
+
+    private class GetAllStudents implements Callable<List<Students>> {
+        private String uid;
+
+        public GetAllStudents(String uid) {
+            this.uid = uid;
+        }
+
+        @Override
+        public List<Students> call() throws Exception {
+            return studentsDao.getAllStudents(uid);
+        }
+    }
+
     private class GetStudentCount implements Callable<Integer> {
         private String uid;
         private long class_id;
@@ -187,8 +250,33 @@ public class StudentRepo {
 
         @Override
         public Students call() throws Exception {
-             studentsDao.insertStudents(students);
-             return  students;
+
+            studentsDao.insertStudents(students);
+            List<Students> studentsList = studentsDao.getStudentsByStudentIdGCC(students.getUid()
+                    ,students.getId(),students.getClass_id(),students.getGroup_id(),students.getCreated_at());
+
+            if (studentsList != null && studentsList.size() > 0){
+                 students=studentsList.get(0);
+                for (AddStudentPaymentList pay: paymentDao.getAddStudentPaymentList(students.getUid()
+                        ,students.getGroup_id(),students.getStarting_date())){
+                    Payments payments = new Payments();
+                    payments.setUid(students.getUid());
+                    payments.setClass_id(students.getClass_id());
+                    payments.setGroup_id(students.getGroup_id());
+                    payments.setStudent_id(students.getStudent_id());
+                    payments.setPayment_month(pay.getPayment_month());
+                    payments.setPayment_amount(pay.getPayment_amount());
+                    payments.setPayment_status(false);
+                    payments.setClass_name(students.getClass_name());
+                    payments.setGroup_name(students.getGroup_name());
+                    payments.setStudent_name(students.getFull_name());
+                    payments.setGuardian_name(students.getGuardian_name());
+                    payments.setPhone(students.getPhone());
+                    payments.setId(students.getId());
+                    payments.setStudent_id(students.getStudent_id());
+                }
+            }
+            return  students;
         }
     }
 
@@ -203,6 +291,28 @@ public class StudentRepo {
         @Override
         public Students call() throws Exception {
              studentsDao.updateStudents(students);
+             paymentDao.deletePaymentByPaymentMonthAndGroupIdAndStudentId(students.getUid(),
+                    students.getStarting_date() ,students.getStudent_id());
+
+            for (AddStudentPaymentList pay: paymentDao.getAddStudentPaymentList(students.getUid()
+                    ,students.getGroup_id(),students.getStarting_date())){
+                Payments payments = new Payments();
+                payments.setUid(students.getUid());
+                payments.setClass_id(students.getClass_id());
+                payments.setGroup_id(students.getGroup_id());
+                payments.setStudent_id(students.getStudent_id());
+                payments.setPayment_month(pay.getPayment_month());
+                payments.setPayment_amount(pay.getPayment_amount());
+                payments.setPayment_status(false);
+                payments.setClass_name(students.getClass_name());
+                payments.setGroup_name(students.getGroup_name());
+                payments.setStudent_name(students.getFull_name());
+                payments.setGuardian_name(students.getGuardian_name());
+                payments.setPhone(students.getPhone());
+                payments.setId(students.getId());
+                payments.setStudent_id(students.getStudent_id());
+            }
+
              return  students;
         }
     }
@@ -217,6 +327,9 @@ public class StudentRepo {
         @Override
         public Students call() throws Exception {
              studentsDao.deleteStudents(students);
+                paymentDao.deletePaymentByPaymentMonthAndGroupIdAndStudentId(students.getUid(),
+                        DateObj.monthYearToLong(new Timestamp(System.currentTimeMillis()))
+                        ,students.getStudent_id());
              return  students;
         }
     }

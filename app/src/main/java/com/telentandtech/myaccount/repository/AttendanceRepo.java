@@ -160,6 +160,18 @@ public class AttendanceRepo {
         });
     }
 
+    public void getAllAttendanceList(String uid) {
+        taskRunner.executeAsync(new GetAllAttendanceList(uid), result -> {
+            if (result != null && result.size() > 0) {
+                attendanceListLiveData.postValue(new
+                        AttendanceListResult(result, true, "Getting Attendance List Successful"));
+            } else {
+                attendanceListLiveData.postValue(new
+                        AttendanceListResult(null, false, "Getting Attendance List Failed"));
+            }
+        });
+    }
+
     public void getGroupNameIdList(String uid, long class_id) {
         taskRunner.executeAsync(new AttendanceRepo.GetGroupNameIdList(uid, class_id), result -> {
             if (result != null && result.size() > 0) {
@@ -172,6 +184,19 @@ public class AttendanceRepo {
         });
     }
 
+
+    private class GetAllAttendanceList implements Callable<List<Attendance>> {
+        private String uid;
+
+        public GetAllAttendanceList(String uid) {
+            this.uid = uid;
+        }
+
+        @Override
+        public List<Attendance> call() throws Exception {
+            return attendanceDao.getAllAttendance(uid);
+        }
+    }
 
     private class InsertAttendance implements Callable<Attendance> {
         private Attendance attendance;

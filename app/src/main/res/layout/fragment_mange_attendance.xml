@@ -29,21 +29,20 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3">
     <Spinner
         android:id="@+id/attendance_class_spinner"
-        android:layout_width="170dp"
+        android:layout_width="@dimen/_145sdp"
         android:layout_height="40dp"
         android:elevation="10dp"
         android:popupBackground="@color/white"
         android:spinnerMode="dropdown" />
         </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select_group"
-        app:layout_constraintStart_toEndOf="@+id/attendance_class_card_view"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_group"
+            app:layout_constraintStart_toStartOf="@+id/attendance_group_card_view"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/attendance_group_card_view"
@@ -57,7 +56,7 @@
 
     <Spinner
         android:id="@+id/attendance_group_spinner"
-        android:layout_width="170dp"
+        android:layout_width="@dimen/_145sdp"
         android:layout_height="40dp"
         android:elevation="10dp"
         android:popupBackground="@color/white"
@@ -126,6 +125,16 @@
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/manage_attendance_print_fab"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:icon="@drawable/baseline_print_24"
+        android:layout_gravity="bottom|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/light_red"
+        app:iconSize="40dp" />
 
 </FrameLayout>

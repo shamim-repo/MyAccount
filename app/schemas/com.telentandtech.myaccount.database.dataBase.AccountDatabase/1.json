@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "35c3a2368706b2d9ff1b16c7788f5ce1",
+    "identityHash": "4b46b6da6df0cdbf17b0f76cd92b53c8",
     "entities": [
       {
         "tableName": "attendance",
@@ -277,62 +277,6 @@
         "foreignKeys": []
       },
       {
-        "tableName": "lesion",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`lesion_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `class_id` INTEGER NOT NULL, `class_name` TEXT, `group_id` INTEGER NOT NULL, `group_name` TEXT, `lesion_date` INTEGER NOT NULL, `uid` TEXT)",
-        "fields": [
-          {
-            "fieldPath": "lesion_id",
-            "columnName": "lesion_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "class_id",
-            "columnName": "class_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "class_name",
-            "columnName": "class_name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "group_id",
-            "columnName": "group_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "group_name",
-            "columnName": "group_name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "lesion_date",
-            "columnName": "lesion_date",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "uid",
-            "columnName": "uid",
-            "affinity": "TEXT",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": true,
-          "columnNames": [
-            "lesion_id"
-          ]
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
         "tableName": "payments",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`payment_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fees_id` INTEGER NOT NULL, `class_name` TEXT, `class_id` INTEGER NOT NULL, `group_name` TEXT, `group_id` INTEGER NOT NULL, `payment_amount` REAL, `payment_status` INTEGER, `payment_month` INTEGER NOT NULL, `payment_timestamp` INTEGER, `student_id` INTEGER NOT NULL, `id` TEXT, `student_name` TEXT, `guardian_name` TEXT, `phone` TEXT, `uid` TEXT)",
         "fields": [
@@ -588,7 +532,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '35c3a2368706b2d9ff1b16c7788f5ce1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4b46b6da6df0cdbf17b0f76cd92b53c8')"
     ]
   }
 }

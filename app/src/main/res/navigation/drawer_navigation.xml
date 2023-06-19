@@ -54,11 +54,7 @@
         android:name="com.telentandtech.myaccount.ui.main.drawer.student.manageStudent.ManageStudentFragment"
         android:label="@string/manage_student"
         tools:layout="@layout/fragment_manage_student" />
-    <fragment
-        android:id="@+id/nav_edit_student"
-        android:name="com.telentandtech.myaccount.ui.main.drawer.student.editStudent.EditStudentFragment"
-        android:label="Edit Student"
-        tools:layout="@layout/fragment_edit_student" />
+
     <fragment
         android:id="@+id/nav_add_fee"
         android:name="com.telentandtech.myaccount.ui.main.drawer.fee.addFee.AddFeeFragment"
@@ -70,11 +66,7 @@
         android:label="@string/manage_fee"
         tools:layout="@layout/fragment_manage_fee" />
 
-    <fragment
-        android:id="@+id/nav_edit_fee"
-        android:name="com.telentandtech.myaccount.ui.main.drawer.fee.editFee.EditFeeFragment"
-        android:label="Edit Fee"
-        tools:layout="@layout/fragment_edit_fee" />
+
 
     <fragment
         android:id="@+id/nav_setting"

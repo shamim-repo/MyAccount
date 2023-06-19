@@ -62,8 +62,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView4">
                 <Spinner
                     android:id="@+id/add_fee_class_spinner"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="50dp"
                     android:elevation="10dp"
                     android:popupBackground="@color/white"
                     android:spinnerMode="dropdown" />
@@ -87,8 +87,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView5" >
                 <Spinner
                     android:id="@+id/add_fee_group_spinner"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="50dp"
                     android:elevation="10dp"
                     android:popupBackground="@color/white"
                     android:spinnerMode="dropdown"
@@ -119,19 +119,62 @@
                         android:inputType="numberDecimal" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+                <RadioGroup
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/edit_fee_monthly_yearly_radio_group"
+                    android:layout_width="@dimen/_230sdp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/pink_out_line"
+                    android:checkedButton="@+id/edit_fee_monthly_add_fee"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/login_email_edit_text_field">
+
+                    <RadioButton
+                        android:id="@+id/edit_fee_monthly_add_fee"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/toggle_widget_background"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="One Month"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        android:id="@+id/edit_fee_month_range_add_fee"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/toggle_widget_background"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="Month Range"
+                        android:textColor="@color/white" />
+                </RadioGroup>
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/login_email_edit_text_field66"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_marginVertical="10dp"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginRight="10dp"
+                    android:clickable="false"
+                    android:enabled="false"
                     app:boxBackgroundColor="#A4438E68"
                     app:boxStrokeColor="@color/white"
                     app:boxStrokeWidth="2dp"
-                    android:layout_marginRight="10dp"
                     app:hintTextColor="@color/black"
-                    android:clickable="false"
-                    android:enabled="false"
                     app:layout_constraintEnd_toStartOf="@+id/edit_fee_pick_month_button"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/login_email_edit_text_field"
@@ -148,11 +191,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="10dp"
                     android:id="@+id/edit_fee_pick_month_button"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
+                    android:layout_marginTop="70sp"
+                    android:layout_marginHorizontal="10dp"
                     android:backgroundTint="@color/light_red"
                     android:clickable="true"
                     android:text="@string/pick_month"

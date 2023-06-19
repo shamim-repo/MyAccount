@@ -28,6 +28,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.google.android.material.button.MaterialButton;
@@ -62,6 +64,8 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
     private int lastDeletedPosition;
     private boolean isEdit = false;
     private boolean isDelete = false;
+    private boolean isAdd = false;
+    private boolean isList = false;
 
 
     public static ManageFeeFragment newInstance() {
@@ -132,6 +136,7 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
                 groupSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        isList = true;
                         selectedGroupNameID = groupNameIDList.getGroupNameIDList().get(position);
                         mViewModel.getFeesList(authUser.getUid(), selectedClassNameId.getClass_id(), selectedGroupNameID.getGroup_id());
                     }
@@ -145,37 +150,42 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
         });
 
        mViewModel.getFeesListLiveData().observe(getViewLifecycleOwner(), feesList -> {
-           if (feesList.isSuccessful()) {
+           if (feesList.isSuccessful() && isList) {
                 this.feesList = feesList.getFeesList();
                adapter = new ManageFeeAdapter(feesList.getFeesList(),this::onClick);
                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                recyclerView.setAdapter(adapter);
+                isList = false;
            }
        });
 
        mViewModel.getDeleteLiveData().observe(getViewLifecycleOwner(), delete -> {
-           if (delete.isSuccessful()) {
+           if (delete.isSuccessful() && isDelete ) {
                feesList.remove(lastDeletedPosition);
                adapter.notifyItemRemoved(lastDeletedPosition);
                adapter.notifyItemRangeChanged(lastDeletedPosition,feesList.size());
                Snackbar.make(getView(), "Fee Deleted", Snackbar.LENGTH_LONG)
                        .setAction("Undo", v -> {
+                            isAdd = true;
                            mViewModel.insertFee(delete.getFees());
                        }).show();
+                isDelete = false;
            }
        });
 
        mViewModel.getInsertLiveData().observe(getViewLifecycleOwner(), insert -> {
-           if (insert.isSuccessful()) {
+           if (insert.isSuccessful() && isAdd) {
                feesList.add(lastDeletedPosition,insert.getFees());
                adapter.notifyItemInserted(lastDeletedPosition);
                adapter.notifyItemRangeChanged(lastDeletedPosition,feesList.size());
+                isAdd = false;
            }
        });
        mViewModel.getUpdateLiveData().observe(getViewLifecycleOwner(), update -> {
-           if (update.isSuccessful()) {
+           if (update.isSuccessful() && isEdit) {
                feesList.set(lastEditedPosition,update.getFees());
                adapter.notifyItemChanged(lastEditedPosition);
+               isEdit = false;
            }
        });
     }
@@ -208,6 +218,9 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
         Spinner groupSpinner = view.findViewById(R.id.add_fee_group_spinner);
         TextInputEditText feeMonthEditText = view.findViewById(R.id.edit_fee_month_edit_text);
         MaterialButton feeMonthPickerButton = view.findViewById(R.id.edit_fee_pick_month_button);
+        feeMonthPickerButton.setEnabled(false);
+        RadioGroup feeTypeRadioGroup = view.findViewById(R.id.edit_fee_monthly_yearly_radio_group);
+        feeTypeRadioGroup.setVisibility(View.GONE);
 
         feeAmountEditText.setText(String.valueOf(fees.getFee_amount()));
         feeMonthEditText.setText(DateObj.longToMonthYear(fees.getFee_month()));
@@ -223,18 +236,6 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
         groupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         groupSpinner.setAdapter(groupAdapter);
         groupSpinner.setSelection(0);
-
-        feeMonthPickerButton.setOnClickListener(v -> {
-            MaterialDatePicker.Builder builder1 = MaterialDatePicker.Builder.datePicker();
-            builder1.setTitleText("Select Month");
-            MaterialDatePicker materialDatePicker = builder1.build();
-            materialDatePicker.show(getParentFragmentManager(), "DATE_PICKER");
-            materialDatePicker.addOnPositiveButtonClickListener(selection -> {
-                Timestamp timestamp = new Timestamp((Long) selection);
-                feeMonthEditText.setText(DateObj.timestampToMonthYearString(timestamp));
-                fees.setFee_month(DateObj.monthYearToLong(timestamp));
-            });
-        });
 
         builder.setPositiveButton("Update", (dialog, which) -> {
             if (feeAmountEditText.getText().toString().isEmpty()) {

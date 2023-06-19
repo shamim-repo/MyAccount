@@ -6,6 +6,7 @@ import static com.telentandtech.myaccount.core.DataClass.USER_NAME;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -16,6 +17,8 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
+import android.print.PrintManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,16 +30,22 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.telentandtech.myaccount.R;
 import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.core.OnClickListener;
+import com.telentandtech.myaccount.DocumentUtils.CSVUtils;
+import com.telentandtech.myaccount.DocumentUtils.CSVtoPDFConverter;
+import com.telentandtech.myaccount.DocumentUtils.PdfDocumentAdapter;
 import com.telentandtech.myaccount.database.entityes.Attendance;
 import com.telentandtech.myaccount.database.entityes.Students;
 import com.telentandtech.myaccount.database.entityes.User;
 import com.telentandtech.myaccount.ui.main.drawer.attentence.recycleView.AttendanceAdapter;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +62,9 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
     private User authUser;
     private Long selectedDate;
     private int lastUpdate;
+    private boolean getAttendance = false;
+    private boolean getStudents = false;
+    private boolean getUpdate = false;
 
     public static MangeAttendanceFragment newInstance() {
         return new MangeAttendanceFragment();
@@ -127,6 +139,7 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
                         recyclerView.setAdapter(null);
                         if (!dateEditText.getText().toString().isEmpty()){
                             if(selectedDate != null){
+                                getAttendance = true;
                                 mViewModel.getAttendanceList(authUser.getUid(),
                                         groups.getGroupNameIDList().get(position).getGroup_id(),
                                         selectedDate);
@@ -150,6 +163,7 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
                 recyclerView.setAdapter(null);
                 selectedDate = DateObj.dateToLong(new Timestamp(selection));
                 dateEditText.setText(DateObj.longToDateString(selectedDate));
+                getAttendance = true;
                 mViewModel.getAttendanceList(authUser.getUid(),
                             mViewModel.getGroupNameIdLiveData().getValue().getGroupNameIDList()
                                     .get(groupSpinner.getSelectedItemPosition()).getGroup_id(), selectedDate);
@@ -157,7 +171,7 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
         });
 
         mViewModel.getAttendanceListLiveData().observe(getViewLifecycleOwner(), attendanceList -> {
-            if(attendanceList.isSuccessful()){
+            if(attendanceList.isSuccessful() && getAttendance){
                 Log.d("ManageAttendanceFragment", "attendanceList.isSuccessful(): ");
                 if (attendanceList.getMessage().equals("No Attendance Found")) {
                     Log.d("ManageAttendanceFragment", "onViewCreated: No Data Found");
@@ -166,34 +180,45 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
                                     .get(classSpinner.getSelectedItemPosition()).getClass_id(),
                             mViewModel.getGroupNameIdLiveData().getValue().getGroupNameIDList()
                                     .get(groupSpinner.getSelectedItemPosition()).getGroup_id());
-
-                }else if(attendanceList.getAttendanceList() != null && attendanceList.getAttendanceList().size() > 0){
+                    getStudents = true;
+                }else if(attendanceList.getAttendanceList() != null && attendanceList.getAttendanceList().size() > 0 ){
                     attendanceAdapter = new AttendanceAdapter(attendanceList.getAttendanceList(),this::onClick);
                     recyclerView.setAdapter(attendanceAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    getAttendance = false;
                 }
                 Toast.makeText(getContext(), attendanceList.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
         mViewModel.getStudentListLiveData().observe(getViewLifecycleOwner(), studentList -> {
-            if(studentList.isSuccessful() && studentList.getStudentsList().size() > 0){
-                Log.d("ManageAttendanceFragment", "onViewCreated: "+studentList.getStudentsList().size());
+            if(studentList.isSuccessful() && studentList.getStudentsList().size() > 0 &&  getStudents){
                 mViewModel.insertAttendanceList(getAttendanceList(studentList.getStudentsList()));
+            getStudents = false;
             }
-            Log.d("ManageAttendanceFragment", "onViewCreated: "+studentList.getMessage());
         });
 
         mViewModel.getUpdateLiveData().observe(getViewLifecycleOwner(), update -> {
-            if(update.isSuccessful()){
+            if(update.isSuccessful() && getUpdate){
                 attendanceAdapter.notifyItemChanged(lastUpdate);
+                getUpdate = false;
             }
         });
+
+        ExtendedFloatingActionButton printButton = view.findViewById(R.id.manage_attendance_fab);
+        printButton.setOnClickListener(v -> {
+
+            if (attendanceAdapter != null && attendanceAdapter.attendanceList.size() > 0) {
+                createPrintDocument(attendanceAdapter.attendanceList);
+            }
+        });
+
     }
 
     @Override
     public void onClick(int position, String option) {
         lastUpdate=position;
+        getUpdate = true;
         Attendance attendance = mViewModel.getAttendanceListLiveData()
                 .getValue().getAttendanceList().get(position);
         if(attendance.isAttended()){
@@ -220,9 +245,68 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
                     student.getId(),
                     student.getPhone(),
                     false,
-                    (long)selectedDate,
+                    selectedDate,
                     authUser.getUid()));
         }
         return attendanceList;
+    }
+
+    private void createPrintDocument(List<Attendance> attendanceList) {
+        MaterialAlertDialogBuilder builder=
+                new MaterialAlertDialogBuilder(getContext())
+                        .setTitle("Print Attendance List")
+                        .setMessage("Are you sure you want to print attendance list?")
+                        .setPositiveButton("Print", (dialog, which) -> {
+                            ArrayList<List<String>> rows = new ArrayList<>();
+                            List<String> list1 = new ArrayList<String>();
+                            list1.add("UID");
+                            list1.add("ID");
+                            list1.add("Name");
+                            list1.add("Group ID");
+                            list1.add("Group");
+                            list1.add("Phone");
+                            list1.add("Date");
+                            list1.add("Attendance");
+                            rows.add(list1);
+
+                            for (Attendance attendance : attendanceList) {
+                                List<String> list = new ArrayList<String>();
+                                list.add(String.valueOf(attendance.getStudent_id()));
+                                list.add(String.valueOf(attendance.getId()));
+                                list.add(attendance.getStudent_name());
+                                list.add(String.valueOf(attendance.getGroup_id()));
+                                list.add(attendance.getGroup_name());
+                                list.add(attendance.getPhone());
+                                list.add(DateObj.longToDateString(attendance.getDate()));
+                                if (attendance.isAttended())
+                                    list.add("Present");
+                                else
+                                    list.add("Absent");
+
+                                rows.add(list);
+                            }
+                            ArrayList<String[]> list2 = new ArrayList<>();
+
+                            for (List<String> list : rows) {
+                                String[] strings = new String[list.size()];
+                                strings = list.toArray(strings);
+                                list2.add(strings);
+                            }
+                            File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+                            File dir=new File(directory.getAbsolutePath()+"/MyAccount");
+
+                            File fileCsv = new File(getContext().getExternalFilesDir(null), "attendance.csv");
+                            CSVUtils.writeListToCSV(list2, fileCsv.getPath());
+                            CSVtoPDFConverter.convertCSVtoPDF(fileCsv.getPath(), "attendance.pdf", 8);
+
+                            dir=new File(dir.getAbsolutePath(),"attendance.pdf");
+
+                            PdfDocumentAdapter documentAdapter = new PdfDocumentAdapter(getContext(),dir.getPath());
+                            PrintManager printManager = (PrintManager) getActivity().getSystemService(Context.PRINT_SERVICE);
+                            String jobName = getString(R.string.app_name) + " Print Attendance List";
+                            printManager.print(jobName, documentAdapter, null);
+                        })
+                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+        builder.show();
     }
 }

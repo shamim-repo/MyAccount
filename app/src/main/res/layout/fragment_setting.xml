@@ -3,12 +3,233 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.drawer.setting.SettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+    <LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+  <androidx.cardview.widget.CardView
+      android:background="?android:attr/selectableItemBackground"
+      android:clickable="true"
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:id="@+id/student_list_export"
+      app:cardBackgroundColor="@color/darker_green">
+      <LinearLayout
+          android:padding="10dp"
+          android:layout_width="match_parent"
+          android:background="?android:attr/selectableItemBackground"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="30sp"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          android:fontFamily="serif-monospace"
+          android:text="Export Student" />
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="15sp"
+              android:textColor="#E8D5D5"
+              android:layout_marginRight="50dp"
+              android:text="Export student list to microsoft excel or pdf." />
+      </LinearLayout>
+      <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:tintMode="multiply"
+          android:layout_gravity="center|right"
+          android:src="@drawable/baseline_chevron_right_24"
+          app:tint="@color/white" />
+  </androidx.cardview.widget.CardView>
+<Space
+    android:layout_width="match_parent"
+    android:layout_height="2dp"/>
+    <androidx.cardview.widget.CardView
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:id="@+id/payment_list_export"
+        app:cardBackgroundColor="@color/darker_green">
+        <LinearLayout
+            android:padding="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:fontFamily="serif-monospace"
+                android:text="@string/export_payment" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#E8D5D5"
+                android:layout_marginRight="50dp"
+                android:text="@string/export_payment_list_microsoft_excel_or_pdf" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:tintMode="multiply"
+            android:layout_gravity="center|right"
+            android:src="@drawable/baseline_chevron_right_24"
+            app:tint="@color/white" />
+    </androidx.cardview.widget.CardView>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:clickable="true"
+        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_height="100dp"
+        android:id="@+id/attendance_list_export"
+        app:cardBackgroundColor="@color/darker_green">
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:fontFamily="serif-monospace"
+                android:text="Export Attendance"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#E8D5D5"
+                android:layout_marginRight="50dp"
+                android:text="Export attendance list to microsoft excel or pdf." />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:tintMode="multiply"
+            android:layout_gravity="center|right"
+            android:src="@drawable/baseline_chevron_right_24"
+            app:tint="@color/white" />
+    </androidx.cardview.widget.CardView>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:clickable="true"
+        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_height="100dp"
+        android:id="@+id/backup_full_database_export"
+        app:cardBackgroundColor="@color/darker_red">
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:fontFamily="serif-monospace"
+                android:text="Backup Database"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#E8D5D5"
+                android:layout_marginRight="50dp"
+                android:text="Backup full database to a folder ."/>
+
+        </LinearLayout>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:tintMode="multiply"
+            android:layout_gravity="center|right"
+            android:src="@drawable/baseline_chevron_right_24"
+            app:tint="@color/white" />
+    </androidx.cardview.widget.CardView>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:clickable="true"
+        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_height="100dp"
+        android:id="@+id/restore_full_database_export"
+        app:cardBackgroundColor="@color/darker_red">
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:fontFamily="serif-monospace"
+                android:text="Restore Database"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#E8D5D5"
+                android:layout_marginRight="50dp"
+                android:text="Restore full database from a folder ."/>
+
+        </LinearLayout>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:rotation="180"
+            android:tintMode="multiply"
+            android:layout_gravity="center|right"
+            android:src="@drawable/baseline_chevron_right_24"
+            app:tint="@color/white" />
+    </androidx.cardview.widget.CardView>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+</LinearLayout>
+    </ScrollView>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        app:trackColor="@color/light_red"
+        android:layout_gravity="center"
+        android:layout_width="50dp"
+        android:visibility="gone"
+        android:layout_height="50dp" />
 
 </FrameLayout>

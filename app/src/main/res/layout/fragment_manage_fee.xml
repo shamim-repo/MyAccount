@@ -30,8 +30,8 @@
 
             <Spinner
                 android:id="@+id/manage_fee_class_spinner"
-                android:layout_width="170dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/_145sdp"
+                android:layout_height="50dp"
                 android:elevation="10dp"
                 android:popupBackground="@color/white"
                 android:spinnerMode="dropdown" />
@@ -42,8 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/select_group"
-            android:layout_marginLeft="15dp"
-            app:layout_constraintStart_toEndOf="@+id/manage_fee_class_card_view"
+            app:layout_constraintStart_toStartOf="@+id/manage_fee_group_card_view"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
@@ -58,8 +57,8 @@
 
             <Spinner
                 android:id="@+id/manage_fee_group_spinner"
-                android:layout_width="170dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/_145sdp"
+                android:layout_height="50dp"
                 android:elevation="10dp"
                 android:popupBackground="@color/white"
                 android:spinnerMode="dropdown" />

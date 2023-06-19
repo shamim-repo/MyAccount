@@ -14,8 +14,9 @@ public class DataClass {
     public final static String LOGOUT_="LOGOUT_";
 
     public final static String AUTHENTICATION_STATUS = "AUTHENTICATION_STATUS";
-    public final static String DATABASE_NAME = "my_account_db";
+    public final static String DATABASE_NAME = "may_account";
     public final static int DATABASE_VERSION = 1;
+    public final static String LAST_BACKUP_DATABASE_NAME = "LAST_BACKUP_DATABASE_NAME";
 
     public final static String ADMIN_EMAIL = "admin@gmail.com";
 

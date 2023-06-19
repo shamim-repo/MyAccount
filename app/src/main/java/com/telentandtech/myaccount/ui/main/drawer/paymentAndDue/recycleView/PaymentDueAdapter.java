@@ -21,7 +21,7 @@ import java.util.List;
 
 public class PaymentDueAdapter extends RecyclerView.Adapter<PaymentDueAdapter.ViewHolder>{
 
-    private List<Payments> paymentsList;
+    public List<Payments> paymentsList;
     private OnClickListener onClickListener;
 
     public PaymentDueAdapter(List<Payments> paymentsList, OnClickListener onClickListener) {
@@ -74,6 +74,7 @@ public class PaymentDueAdapter extends RecyclerView.Adapter<PaymentDueAdapter.Vi
         private MaterialButton payButton;
         private MaterialButton editButton;
         private CardView cardView;
+        private ImageView imageView;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -87,9 +88,11 @@ public class PaymentDueAdapter extends RecyclerView.Adapter<PaymentDueAdapter.Vi
             payButton = itemView.findViewById(R.id.payment_pay_button);
             editButton = itemView.findViewById(R.id.payment_edit_button);
             cardView = itemView.findViewById(R.id.payment_card_view);
+            imageView = itemView.findViewById(R.id.delete_payment_image_view);
 
             payButton.setOnClickListener(v -> onClickListener.onClick(getAdapterPosition(),"pay"));
             editButton.setOnClickListener(v -> onClickListener.onClick(getAdapterPosition(),"Un Pay"));
+            imageView.setOnClickListener(v -> onClickListener.onClick(getAdapterPosition(),"delete"));
 
         }
     }

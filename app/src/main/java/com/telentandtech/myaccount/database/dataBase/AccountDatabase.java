@@ -1,6 +1,8 @@
 package com.telentandtech.myaccount.database.dataBase;
 
 
+import static com.telentandtech.myaccount.core.DataClass.DATABASE_NAME;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -16,7 +18,6 @@ import com.telentandtech.myaccount.database.dao.AttendanceDao;
 import com.telentandtech.myaccount.database.dao.ClassDao;
 import com.telentandtech.myaccount.database.dao.FeesDao;
 import com.telentandtech.myaccount.database.dao.GroupDao;
-import com.telentandtech.myaccount.database.dao.LesionDao;
 import com.telentandtech.myaccount.database.dao.PaymentDao;
 import com.telentandtech.myaccount.database.dao.StudentsDao;
 import com.telentandtech.myaccount.database.dao.UserDao;
@@ -24,7 +25,6 @@ import com.telentandtech.myaccount.database.entityes.Attendance;
 import com.telentandtech.myaccount.database.entityes.Classe;
 import com.telentandtech.myaccount.database.entityes.Fees;
 import com.telentandtech.myaccount.database.entityes.Group;
-import com.telentandtech.myaccount.database.entityes.Lesion;
 import com.telentandtech.myaccount.database.entityes.Payments;
 import com.telentandtech.myaccount.database.entityes.Students;
 import com.telentandtech.myaccount.database.entityes.User;
@@ -43,7 +43,6 @@ public abstract class AccountDatabase extends RoomDatabase {
     public abstract ClassDao classDao();
     public abstract FeesDao feesDao();
     public abstract GroupDao groupDao();
-    public abstract LesionDao lesionDao();
     public abstract PaymentDao paymentsDao();
     public abstract StudentsDao studentsDao();
 
@@ -51,7 +50,7 @@ public abstract class AccountDatabase extends RoomDatabase {
     public static synchronized AccountDatabase getInstance(Context context){
         if(databaseInstance == null){
             databaseInstance = Room.databaseBuilder(context.getApplicationContext(),
-                            AccountDatabase.class , "may_account")
+                            AccountDatabase.class , DATABASE_NAME)
                     .fallbackToDestructiveMigration()
                     .addCallback(new Callback() {
                         @Override
@@ -65,9 +64,6 @@ public abstract class AccountDatabase extends RoomDatabase {
                                     getInstance(context).userDao().insertUser(new User(
                                             new HashingHelper().hashString("example@gmail.com"),"example",
                                             "example@gmail.com","12345678"));
-                                    getInstance(context).userDao().insertUser(new User(
-                                            new HashingHelper().hashString("msbsh60@gmail.com"),"msb",
-                                            "msbsh60@gmail.com","12345678"));
                                 } catch (NoSuchAlgorithmException e) {
                                     throw new RuntimeException(e);
                                 }

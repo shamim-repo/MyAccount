@@ -3,6 +3,7 @@ package com.telentandtech.myaccount.repository;
 import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -196,12 +197,21 @@ public class FeesRepo {
 
         @Override
         public Fees call() throws Exception {
+
+            List<Fees> feesList=feesDao.getFeeByMonth(fees.getUid(),fees.getClass_id(),fees.getGroup_id(),fees.getFee_month());
+
+            if (feesList!= null && feesList.size() > 0) {
+                Log.d("FeesRepository","Fees Already Exist");
+                fees.setFee_id(feesList.get(0).getFee_id());
+                updateFees(fees);
+                return fees;
+            }
             feesDao.insertFees(fees);
             List<Students> studentsList=studentDao.getStudentsByGroupIdStartingMonth(
                     fees.getUid(),fees.getGroup_id(),fees.getFee_month());
             for(Students students:studentsList){
                 Payments payments=new Payments();
-
+                Log.d("FeesRepository","Fees Inserted");
                 payments.setClass_id(students.getClass_id());
                 payments.setClass_name(students.getClass_name());
                 payments.setGroup_id(students.getGroup_id());
@@ -233,10 +243,9 @@ public class FeesRepo {
         @Override
         public Fees call() throws Exception {
             feesDao.updateFees(fees);
-            List<Payments> paymentsList=paymentDao.getPaymentsByPaymentMonthFeeId(fees.getUid(),fees.getGroup_id(),fees.getFee_month(),fees.getFee_id());
+            List<Payments> paymentsList=paymentDao.getPaymentsByPaymentMonthFeeId(fees.getUid(),fees.getGroup_id(),fees.getFee_id());
             for(Payments payments:paymentsList){
                 payments.setPayment_amount(fees.getFee_amount());
-                payments.setPayment_month(fees.getFee_month());
                 paymentDao.updatePayment(payments);
             }
             return fees;
@@ -252,6 +261,7 @@ public class FeesRepo {
 
         @Override
         public Fees call() throws Exception {
+            paymentDao.deletePaymentById(fees.getUid(),fees.getFee_id());
             feesDao.deleteFees(fees);
             return fees;
         }
