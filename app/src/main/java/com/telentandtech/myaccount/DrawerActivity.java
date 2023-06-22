@@ -3,7 +3,6 @@ package com.telentandtech.myaccount;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,7 +16,6 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
-import com.telentandtech.myaccount.LogInActivity;
 
 import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.database.entityes.User;

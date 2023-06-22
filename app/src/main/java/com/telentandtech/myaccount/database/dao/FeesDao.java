@@ -1,6 +1,5 @@
 package com.telentandtech.myaccount.database.dao;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -8,12 +7,11 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.telentandtech.myaccount.database.entityes.Fees;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
+import com.telentandtech.myaccount.database.entityes.Fees;
 
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Dao

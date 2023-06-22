@@ -8,10 +8,12 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
+import com.telentandtech.myaccount.database.dao.ClassDao;
+import com.telentandtech.myaccount.database.dao.GroupDao;
 import com.telentandtech.myaccount.database.dao.PaymentDao;
 import com.telentandtech.myaccount.database.dataBase.AccountDatabase;
 import com.telentandtech.myaccount.database.entityes.Payments;
-import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameIdListResult;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameIDListResult;
@@ -25,6 +27,8 @@ import java.util.concurrent.Executors;
 
 public class PaymentRepo {
     private PaymentDao paymentDao;
+    private ClassDao classDao;
+    private GroupDao groupDao;
     private AccountDatabase db;
     private TaskRunner taskRunner;
 
@@ -47,6 +51,8 @@ public class PaymentRepo {
         paymentsListResultMutableLiveData = new MutableLiveData<>();
         classNameIdMutableLiveData = new MutableLiveData<>();
         groupNameIDMutableLiveData = new MutableLiveData<>();
+        classDao = db.classDao();
+        groupDao = db.groupDao();
     }
 
     public LiveData<ClassNameIdListResult> getClassNameIdMutableLiveData() {
@@ -263,7 +269,7 @@ public class PaymentRepo {
 
         @Override
         public List<ClassNameId> call() throws Exception {
-            return paymentDao.getClassNameIDList(uid);
+            return classDao.getDistinctClassesList(uid);
         }
     }
 
@@ -278,7 +284,7 @@ public class PaymentRepo {
 
         @Override
         public List<GroupNameID> call() throws Exception {
-            return paymentDao.getGroupNameIDList(uid,class_id);
+            return groupDao.getDistinctGroupNames(uid,class_id);
         }
     }
     private class TaskRunner {

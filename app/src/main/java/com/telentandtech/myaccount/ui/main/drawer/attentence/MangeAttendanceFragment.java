@@ -1,9 +1,5 @@
 package com.telentandtech.myaccount.ui.main.drawer.attentence;
 
-import static com.telentandtech.myaccount.core.DataClass.UID;
-import static com.telentandtech.myaccount.core.DataClass.USER_EMAIL;
-import static com.telentandtech.myaccount.core.DataClass.USER_NAME;
-
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -19,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
 import android.print.PrintManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,13 +28,14 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+
+import com.telentandtech.myaccount.DocumentUtils.CSVUtils;
+import com.telentandtech.myaccount.DocumentUtils.CSVtoPDFConverter;
+import com.telentandtech.myaccount.DocumentUtils.PdfDocumentAdapter;
 import com.telentandtech.myaccount.R;
 import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.core.OnClickListener;
-import com.telentandtech.myaccount.DocumentUtils.CSVUtils;
-import com.telentandtech.myaccount.DocumentUtils.CSVtoPDFConverter;
-import com.telentandtech.myaccount.DocumentUtils.PdfDocumentAdapter;
 import com.telentandtech.myaccount.database.entityes.Attendance;
 import com.telentandtech.myaccount.database.entityes.Students;
 import com.telentandtech.myaccount.database.entityes.User;
@@ -65,6 +61,8 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
     private boolean getAttendance = false;
     private boolean getStudents = false;
     private boolean getUpdate = false;
+    private ExtendedFloatingActionButton addAttendanceButton;
+    private ExtendedFloatingActionButton printButton;
 
     public static MangeAttendanceFragment newInstance() {
         return new MangeAttendanceFragment();
@@ -86,9 +84,9 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
     private void getSharedPref() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         authUser=new User(
-                sharedPreferences.getString(UID,""),
-                sharedPreferences.getString(USER_EMAIL,""),
-                sharedPreferences.getString(USER_NAME,"")
+                sharedPreferences.getString(DataClass.UID,""),
+                sharedPreferences.getString(DataClass.USER_EMAIL,""),
+                sharedPreferences.getString(DataClass.USER_NAME,"")
         );
     }
     @Override
@@ -100,6 +98,8 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
         pickDateButton = view.findViewById(R.id.attendance_pick_date_button);
         dateEditText = view.findViewById(R.id.attendance_date_edit_text);
         dateEditText.setEnabled(false);
+        addAttendanceButton = view.findViewById(R.id.manage_attendance_add_fab);
+        printButton = view.findViewById(R.id.manage_attendance_print_fab);
 
         mViewModel.getClassList(authUser.getUid());
         mViewModel.getClassNameIdLiveData().observe(getViewLifecycleOwner(), classes -> {
@@ -164,6 +164,8 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
                 selectedDate = DateObj.dateToLong(new Timestamp(selection));
                 dateEditText.setText(DateObj.longToDateString(selectedDate));
                 getAttendance = true;
+                if (groupSpinner!=null && groupSpinner.getSelectedItemPosition() != -1 &&
+                    selectedDate != null && mViewModel.getGroupNameIdLiveData().getValue() != null)
                 mViewModel.getAttendanceList(authUser.getUid(),
                             mViewModel.getGroupNameIdLiveData().getValue().getGroupNameIDList()
                                     .get(groupSpinner.getSelectedItemPosition()).getGroup_id(), selectedDate);
@@ -172,23 +174,29 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
 
         mViewModel.getAttendanceListLiveData().observe(getViewLifecycleOwner(), attendanceList -> {
             if(attendanceList.isSuccessful() && getAttendance){
-                Log.d("ManageAttendanceFragment", "attendanceList.isSuccessful(): ");
                 if (attendanceList.getMessage().equals("No Attendance Found")) {
-                    Log.d("ManageAttendanceFragment", "onViewCreated: No Data Found");
-                    mViewModel.getStudentList(authUser.getUid(),
-                            mViewModel.getClassNameIdLiveData().getValue().getClassNameIdList()
-                                    .get(classSpinner.getSelectedItemPosition()).getClass_id(),
-                            mViewModel.getGroupNameIdLiveData().getValue().getGroupNameIDList()
-                                    .get(groupSpinner.getSelectedItemPosition()).getGroup_id());
-                    getStudents = true;
+                    printButton.setVisibility(View.GONE);
+                    addAttendanceButton.setVisibility(View.VISIBLE);
                 }else if(attendanceList.getAttendanceList() != null && attendanceList.getAttendanceList().size() > 0 ){
                     attendanceAdapter = new AttendanceAdapter(attendanceList.getAttendanceList(),this::onClick);
                     recyclerView.setAdapter(attendanceAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     getAttendance = false;
+                    addAttendanceButton.setVisibility(View.GONE);
+                    printButton.setVisibility(View.VISIBLE);
                 }
                 Toast.makeText(getContext(), attendanceList.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        });
+
+
+        addAttendanceButton.setOnClickListener(v -> {
+            mViewModel.getStudentList(authUser.getUid(),
+                    mViewModel.getClassNameIdLiveData().getValue().getClassNameIdList()
+                            .get(classSpinner.getSelectedItemPosition()).getClass_id(),
+                    mViewModel.getGroupNameIdLiveData().getValue().getGroupNameIDList()
+                            .get(groupSpinner.getSelectedItemPosition()).getGroup_id());
+            getStudents = true;
         });
 
         mViewModel.getStudentListLiveData().observe(getViewLifecycleOwner(), studentList -> {
@@ -205,9 +213,7 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
             }
         });
 
-        ExtendedFloatingActionButton printButton = view.findViewById(R.id.manage_attendance_fab);
         printButton.setOnClickListener(v -> {
-
             if (attendanceAdapter != null && attendanceAdapter.attendanceList.size() > 0) {
                 createPrintDocument(attendanceAdapter.attendanceList);
             }
@@ -233,6 +239,8 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
     //Students To attendanceList
     private List<Attendance> getAttendanceList(List<Students> studentsList){
 
+        if (studentsList==null && studentsList.size() == 0)
+            return null;
         ArrayList<Attendance> attendanceList = new ArrayList<>();
         for (Students student : studentsList){
             attendanceList.add(new Attendance(
@@ -252,6 +260,8 @@ public class MangeAttendanceFragment extends Fragment implements OnClickListener
     }
 
     private void createPrintDocument(List<Attendance> attendanceList) {
+        if(attendanceList==null && attendanceList.size() == 0)
+            return;
         MaterialAlertDialogBuilder builder=
                 new MaterialAlertDialogBuilder(getContext())
                         .setTitle("Print Attendance List")

@@ -5,9 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.telentandtech.myaccount.database.dao.UserDao;
 import com.telentandtech.myaccount.database.entityes.User;
 import com.telentandtech.myaccount.database.resultObjects.UserListResult;
 import com.telentandtech.myaccount.database.resultObjects.UserResult;

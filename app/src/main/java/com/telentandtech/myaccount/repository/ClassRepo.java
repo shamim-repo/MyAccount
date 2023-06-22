@@ -196,8 +196,6 @@ public class ClassRepo {
 
         @Override
         public List<Classe> call() throws Exception {
-
-
             return classDao.getAllClassesList(uid);
         }
     }

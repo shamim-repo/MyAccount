@@ -5,16 +5,11 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.telentandtech.myaccount.database.dao.FeesDao;
 import com.telentandtech.myaccount.database.entityes.Fees;
 import com.telentandtech.myaccount.database.resultObjects.ClassListResult;
-import com.telentandtech.myaccount.database.resultObjects.ClassNameIdListResult;
 import com.telentandtech.myaccount.database.resultObjects.FeesResult;
 import com.telentandtech.myaccount.database.resultObjects.GroupListResult;
-import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
-import com.telentandtech.myaccount.database.resultObjects.GroupNameIDListResult;
 import com.telentandtech.myaccount.repository.ClassRepo;
 import com.telentandtech.myaccount.repository.FeesRepo;
 import com.telentandtech.myaccount.repository.GroupRepo;

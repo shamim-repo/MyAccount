@@ -4,7 +4,6 @@ package com.telentandtech.myaccount.repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -18,7 +17,6 @@ import com.telentandtech.myaccount.database.resultObjects.UserResult;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class UserRepo {
     private UserDao userDao;

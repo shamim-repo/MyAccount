@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.telentandtech.myaccount.database.entityes.Payments;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameIdListResult;
@@ -13,8 +12,6 @@ import com.telentandtech.myaccount.database.resultObjects.GroupNameIDListResult;
 import com.telentandtech.myaccount.database.resultObjects.PaymentsListResult;
 import com.telentandtech.myaccount.database.resultObjects.PaymentsResult;
 import com.telentandtech.myaccount.repository.PaymentRepo;
-
-import java.util.List;
 
 public class PaymentAndDueViewModel extends AndroidViewModel {
     private PaymentRepo paymentRepo;

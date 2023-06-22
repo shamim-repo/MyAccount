@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/eft"
-    tools:context=".ui.main.drawer.classes.editGroup.EditGroupFragment">
+    tools:context="com.telentandtech.myaccount.ui.main.drawer.classes.manageGroup.ManageGroupFragment">
 
     <ScrollView
         android:layout_width="match_parent"

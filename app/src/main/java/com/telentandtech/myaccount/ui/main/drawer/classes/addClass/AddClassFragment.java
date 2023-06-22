@@ -1,9 +1,5 @@
 package com.telentandtech.myaccount.ui.main.drawer.classes.addClass;
 
-import static com.telentandtech.myaccount.core.DataClass.UID;
-import static com.telentandtech.myaccount.core.DataClass.USER_EMAIL;
-import static com.telentandtech.myaccount.core.DataClass.USER_NAME;
-
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.SharedPreferences;
@@ -21,7 +17,9 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+
 import com.telentandtech.myaccount.R;
+import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.database.entityes.Classe;
 import com.telentandtech.myaccount.database.entityes.User;
 
@@ -53,9 +51,9 @@ public class AddClassFragment extends Fragment {
     private void getSharedPref() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         authUser = new User(
-                sharedPreferences.getString(UID,""),
-                sharedPreferences.getString(USER_NAME,""),
-                sharedPreferences.getString(USER_EMAIL,""));
+                sharedPreferences.getString(DataClass.UID,""),
+                sharedPreferences.getString(DataClass.USER_NAME,""),
+                sharedPreferences.getString(DataClass.USER_EMAIL,""));
     }
 
 

@@ -3,25 +3,25 @@ package com.telentandtech.myaccount.repository;
 import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
+import com.telentandtech.myaccount.database.dao.ClassDao;
 import com.telentandtech.myaccount.database.dao.FeesDao;
+import com.telentandtech.myaccount.database.dao.GroupDao;
 import com.telentandtech.myaccount.database.dao.PaymentDao;
 import com.telentandtech.myaccount.database.dao.StudentsDao;
 import com.telentandtech.myaccount.database.dataBase.AccountDatabase;
 import com.telentandtech.myaccount.database.entityes.Fees;
 import com.telentandtech.myaccount.database.entityes.Payments;
 import com.telentandtech.myaccount.database.entityes.Students;
-import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameIdListResult;
 import com.telentandtech.myaccount.database.resultObjects.FeesListResult;
 import com.telentandtech.myaccount.database.resultObjects.FeesResult;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameIDListResult;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
@@ -32,6 +32,8 @@ public class FeesRepo {
     private AccountDatabase db;
     private FeesDao feesDao;
     private PaymentDao paymentDao;
+    private ClassDao classDao;
+    private GroupDao groupDao;
     private StudentsDao studentDao;
     private MutableLiveData<ClassNameIdListResult> classNameIdListLiveData;
     private MutableLiveData<GroupNameIDListResult> groupNameIdListLiveData;
@@ -47,6 +49,9 @@ public class FeesRepo {
         this.feesDao = db.feesDao();
         this.paymentDao = db.paymentsDao();
         this.studentDao = db.studentsDao();
+        this.classDao = db.classDao();
+        this.groupDao = db.groupDao();
+
 
         this.classNameIdListLiveData = new MutableLiveData<>();
         this.groupNameIdListLiveData = new MutableLiveData<>();
@@ -152,7 +157,7 @@ public class FeesRepo {
 
         @Override
         public List<ClassNameId> call() throws Exception {
-            return feesDao.getDistinctClassNameId(uid);
+            return classDao.getDistinctClassesList(uid);
         }
     }
 
@@ -167,7 +172,7 @@ public class FeesRepo {
 
         @Override
         public List<GroupNameID> call() throws Exception {
-            return feesDao.getDistinctGroupNameId(uid,class_id );
+            return groupDao.getDistinctGroupNames(uid,class_id );
         }
     }
 
@@ -201,7 +206,6 @@ public class FeesRepo {
             List<Fees> feesList=feesDao.getFeeByMonth(fees.getUid(),fees.getClass_id(),fees.getGroup_id(),fees.getFee_month());
 
             if (feesList!= null && feesList.size() > 0) {
-                Log.d("FeesRepository","Fees Already Exist");
                 fees.setFee_id(feesList.get(0).getFee_id());
                 updateFees(fees);
                 return fees;
@@ -211,7 +215,6 @@ public class FeesRepo {
                     fees.getUid(),fees.getGroup_id(),fees.getFee_month());
             for(Students students:studentsList){
                 Payments payments=new Payments();
-                Log.d("FeesRepository","Fees Inserted");
                 payments.setClass_id(students.getClass_id());
                 payments.setClass_name(students.getClass_name());
                 payments.setGroup_id(students.getGroup_id());

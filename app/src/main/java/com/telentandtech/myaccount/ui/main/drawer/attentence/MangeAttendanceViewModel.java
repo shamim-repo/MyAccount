@@ -1,7 +1,6 @@
 package com.telentandtech.myaccount.ui.main.drawer.attentence;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -47,11 +46,9 @@ public class MangeAttendanceViewModel extends AndroidViewModel {
         attendanceRepo.insertAttendanceList(attendances);
     }
     public void getAttendanceList(String uid,long group_id, long date) {
-        Log.d("MangeAttendanceViewModel", "getAttendanceList: " + uid + " " + group_id + " " + date);
-        attendanceRepo.getAttendanceList(uid, group_id, date);
+       attendanceRepo.getAttendanceList(uid, group_id, date);
     }
     public LiveData<AttendanceListResult> getAttendanceListLiveData() {
-        Log.d("MangeAttendanceViewModel", "getAttendanceListLiveData: ");
         return attendanceRepo.getAttendanceListMutableLiveData();
     }
     public void getClassList(String uid) {

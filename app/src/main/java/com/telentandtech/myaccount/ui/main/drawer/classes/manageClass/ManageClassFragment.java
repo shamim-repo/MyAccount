@@ -1,9 +1,5 @@
 package com.telentandtech.myaccount.ui.main.drawer.classes.manageClass;
 
-import static com.telentandtech.myaccount.core.DataClass.UID;
-import static com.telentandtech.myaccount.core.DataClass.USER_EMAIL;
-import static com.telentandtech.myaccount.core.DataClass.USER_NAME;
-
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.SharedPreferences;
@@ -22,14 +18,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.dialog.MaterialDialogs;
 import com.google.android.material.snackbar.Snackbar;
+
 import com.telentandtech.myaccount.R;
+import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.OnClickListener;
 import com.telentandtech.myaccount.database.entityes.User;
 import com.telentandtech.myaccount.ui.main.drawer.classes.manageClass.recycleViewHelper.ManageClassAdapter;
-
-import java.lang.annotation.Target;
 
 public class ManageClassFragment extends Fragment implements OnClickListener {
 
@@ -60,9 +55,9 @@ public class ManageClassFragment extends Fragment implements OnClickListener {
     private void getSharedPreferences() {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
         authUser = new User(
-                sharedPreferences.getString(UID,""),
-                sharedPreferences.getString(USER_NAME,""),
-                sharedPreferences.getString(USER_EMAIL,"")
+                sharedPreferences.getString(DataClass.UID,""),
+                sharedPreferences.getString(DataClass.USER_NAME,""),
+                sharedPreferences.getString(DataClass.USER_EMAIL,"")
         );
     }
 

@@ -14,8 +14,6 @@ import com.telentandtech.myaccount.repository.ClassRepo;
 import com.telentandtech.myaccount.repository.GroupRepo;
 import com.telentandtech.myaccount.repository.StudentRepo;
 
-import java.util.List;
-
 public class AddStudentViewModel extends AndroidViewModel {
 
     private StudentRepo studentRepo;

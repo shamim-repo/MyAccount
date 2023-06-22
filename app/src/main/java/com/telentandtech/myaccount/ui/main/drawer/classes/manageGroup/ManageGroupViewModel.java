@@ -5,14 +5,11 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.telentandtech.myaccount.database.entityes.Group;
-import com.telentandtech.myaccount.database.resultObjects.ClassListResult;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameIdListResult;
 import com.telentandtech.myaccount.database.resultObjects.GroupListResult;
 import com.telentandtech.myaccount.database.resultObjects.GroupResult;
-import com.telentandtech.myaccount.repository.ClassRepo;
 import com.telentandtech.myaccount.repository.GroupRepo;
 
 public class ManageGroupViewModel extends AndroidViewModel {

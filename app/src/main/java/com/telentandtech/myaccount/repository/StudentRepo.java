@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
+import com.telentandtech.myaccount.database.resultObjects.StudentListResult;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.database.dao.PaymentDao;
 import com.telentandtech.myaccount.database.dao.StudentsDao;
@@ -14,11 +16,9 @@ import com.telentandtech.myaccount.database.dataBase.AccountDatabase;
 import com.telentandtech.myaccount.database.entityes.Payments;
 import com.telentandtech.myaccount.database.entityes.Students;
 import com.telentandtech.myaccount.database.resultObjects.AddStudentPaymentList;
-import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameIdListResult;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameIDListResult;
-import com.telentandtech.myaccount.database.resultObjects.StudentListResult;
 import com.telentandtech.myaccount.database.resultObjects.StudentResult;
 
 import java.sql.Timestamp;
@@ -253,8 +253,9 @@ public class StudentRepo {
 
             studentsDao.insertStudents(students);
             List<Students> studentsList = studentsDao.getStudentsByStudentIdGCC(students.getUid()
-                    ,students.getId(),students.getClass_id(),students.getGroup_id(),students.getCreated_at());
+                    ,students.getId(),students.getClass_id(),students.getGroup_id());
 
+            Log.d("StudentRepo","Student List Size: "+studentsList.size());
             if (studentsList != null && studentsList.size() > 0){
                  students=studentsList.get(0);
                 for (AddStudentPaymentList pay: paymentDao.getAddStudentPaymentList(students.getUid()
@@ -274,6 +275,8 @@ public class StudentRepo {
                     payments.setPhone(students.getPhone());
                     payments.setId(students.getId());
                     payments.setStudent_id(students.getStudent_id());
+
+                    paymentDao.insertPayment(payments);
                 }
             }
             return  students;
@@ -294,6 +297,7 @@ public class StudentRepo {
              paymentDao.deletePaymentByPaymentMonthAndGroupIdAndStudentId(students.getUid(),
                     students.getStarting_date() ,students.getStudent_id());
 
+
             for (AddStudentPaymentList pay: paymentDao.getAddStudentPaymentList(students.getUid()
                     ,students.getGroup_id(),students.getStarting_date())){
                 Payments payments = new Payments();
@@ -311,6 +315,8 @@ public class StudentRepo {
                 payments.setPhone(students.getPhone());
                 payments.setId(students.getId());
                 payments.setStudent_id(students.getStudent_id());
+                paymentDao.insertPayment(payments);
+                Log.d("StudentRepo","Payment Inserted: "+payments.getPayment_month());
             }
 
              return  students;

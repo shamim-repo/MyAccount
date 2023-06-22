@@ -5,12 +5,8 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.telentandtech.myaccount.database.dao.FeesDao;
 import com.telentandtech.myaccount.database.entityes.Fees;
-import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameIdListResult;
 import com.telentandtech.myaccount.database.resultObjects.FeesListResult;
 import com.telentandtech.myaccount.database.resultObjects.FeesResult;

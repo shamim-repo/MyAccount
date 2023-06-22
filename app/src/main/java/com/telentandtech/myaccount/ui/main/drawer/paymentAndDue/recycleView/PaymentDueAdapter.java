@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.telentandtech.myaccount.R;
-import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.core.OnClickListener;
 import com.telentandtech.myaccount.database.entityes.Payments;

@@ -39,16 +39,17 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+
+import com.telentandtech.myaccount.DocumentUtils.CSVUtils;
+import com.telentandtech.myaccount.DocumentUtils.CSVtoPDFConverter;
+import com.telentandtech.myaccount.DocumentUtils.PdfDocumentAdapter;
 import com.telentandtech.myaccount.R;
-import com.telentandtech.myaccount.core.DateObj;
-import com.telentandtech.myaccount.core.OnClickListener;
 import com.telentandtech.myaccount.database.entityes.Students;
 import com.telentandtech.myaccount.database.entityes.User;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
-import com.telentandtech.myaccount.DocumentUtils.CSVUtils;
-import com.telentandtech.myaccount.DocumentUtils.CSVtoPDFConverter;
-import com.telentandtech.myaccount.DocumentUtils.PdfDocumentAdapter;
+import com.telentandtech.myaccount.core.DateObj;
+import com.telentandtech.myaccount.core.OnClickListener;
 import com.telentandtech.myaccount.ui.main.drawer.student.manageStudent.recycleView.ManageStudentAdapter;
 
 import java.io.File;
@@ -119,7 +120,6 @@ public class ManageStudentFragment extends Fragment implements OnClickListener {
         mViewModel.getClassNameIDList(authUser.getUid());
         mViewModel.getClassNameIDListLiveData().observe(getViewLifecycleOwner(), classNameIDList -> {
             if (classNameIDList.getSuccessful()) {
-
                 ArrayAdapter<String> classAdapter = new ArrayAdapter<>(getContext(),
                         android.R.layout.simple_spinner_item, classNameIDListToStringArray(classNameIDList.getClassNameIdList()));
                 classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -128,6 +128,7 @@ public class ManageStudentFragment extends Fragment implements OnClickListener {
                 classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        recyclerView.setAdapter(null);
                         mViewModel.getGroupNameIDList(authUser.getUid(),
                                 classNameIDList.getClassNameIdList().get(position).getClass_id());
                         selectedClassNameId = classNameIDList.getClassNameIdList().get(position);
@@ -151,6 +152,7 @@ public class ManageStudentFragment extends Fragment implements OnClickListener {
                 groupSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        recyclerView.setAdapter(null);
                         selectedGroupNameID = groupNameIDList.getGroupNameIDList().get(position);
                         mViewModel.getStudentList(authUser.getUid(), selectedClassNameId.getClass_id(), selectedGroupNameID.getGroup_id());
                     }

@@ -1,14 +1,15 @@
 package com.telentandtech.myaccount.database.resultObjects;
 
 public class PaidUnpaidCountResult {
+
+    private Long totalCount;
     private Long paidCount;
     private Long unpaidCount;
-    private Long totalCount;
 
-    public PaidUnpaidCountResult(Long paidCount, Long unpaidCount, Long totalCount) {
+    public PaidUnpaidCountResult(Long totalCount, Long paidCount, Long unpaidCount) {
+        this.totalCount = totalCount;
         this.paidCount = paidCount;
         this.unpaidCount = unpaidCount;
-        this.totalCount = totalCount;
     }
 
     public Long getPaidCount() {

@@ -1,6 +1,5 @@
 package com.telentandtech.myaccount.database.dao;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 
@@ -12,10 +11,8 @@ import com.telentandtech.myaccount.database.entityes.Attendance;
 import com.telentandtech.myaccount.database.resultObjects.AttendanceCount;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
-import com.telentandtech.myaccount.database.resultObjects.PaidUnpaidCountResult;
 
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Dao
@@ -43,7 +40,12 @@ public interface AttendanceDao {
     //get attendance total count attendance =1 count and  attendance=0 count by uid
     @Query("SELECT COUNT(*) AS total_count, SUM(CASE WHEN attended = 1 THEN 1 ELSE 0 END)"+
             " AS present_count, SUM(CASE WHEN attended = 0 THEN 1 ELSE 0 END) AS absent_count " +
-            "FROM attendance WHERE uid=:uid")
-    AttendanceCount getAttendanceCount(String uid);
+            "FROM attendance WHERE uid=:uid AND group_id=:group_id AND date>=:date AND date<=(:date+10000)")
+    AttendanceCount getAttendanceCount(String uid, long group_id, long date);
+    @Query("SELECT COUNT(*) AS total_count, SUM(CASE WHEN attended = 1 THEN 1 ELSE 0 END)"+
+            " AS present_count, SUM(CASE WHEN attended = 0 THEN 1 ELSE 0 END) AS absent_count " +
+            "FROM attendance WHERE uid=:uid AND date>=:date AND date<=(:date+10000)")
+    AttendanceCount getAttendanceCountAll(String uid, long date);
+
 
 }

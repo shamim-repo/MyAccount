@@ -91,4 +91,12 @@ public class DateObj {
         }
         return monthYearList;
     }
+    //year text to long yyyyMMdd
+    public static long yearTextToLong(String yearText){
+        return Long.parseLong(yearText.substring(0,4)+"0101");
+    }
+    //year text to long yyyyMM
+    public static long yearTextToMonthYearLong(String yearText){
+        return Long.parseLong(yearText.substring(0,4)+"01");
+    }
 }

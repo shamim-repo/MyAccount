@@ -1,17 +1,8 @@
 package com.telentandtech.myaccount.ui.main.drawer.classes.manageGroup;
 
-import static android.content.ContentValues.TAG;
-import static com.telentandtech.myaccount.core.DataClass.UID;
-import static com.telentandtech.myaccount.core.DataClass.USER_EMAIL;
-import static com.telentandtech.myaccount.core.DataClass.USER_NAME;
-import static com.telentandtech.myaccount.core.DataClass.classListToIdNameStringList;
-import static com.telentandtech.myaccount.core.DataClass.classNameIDListToStringArray;
-
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.SharedPreferences;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,7 +12,6 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,16 +28,16 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.timepicker.MaterialTimePicker;
+
 import com.telentandtech.myaccount.R;
+import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.core.OnClickListener;
 import com.telentandtech.myaccount.core.TimeFormatHelper;
 import com.telentandtech.myaccount.database.entityes.Group;
 import com.telentandtech.myaccount.database.entityes.User;
-import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.ui.main.drawer.classes.manageGroup.recycleViewHelper.ManageGroupAdapter;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public class ManageGroupFragment extends Fragment implements OnClickListener {
@@ -81,9 +71,9 @@ public class ManageGroupFragment extends Fragment implements OnClickListener {
     private void getSharedPref() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         authUser=new User(
-                sharedPreferences.getString(UID,""),
-                sharedPreferences.getString(USER_EMAIL,""),
-                sharedPreferences.getString(USER_NAME,"")
+                sharedPreferences.getString(DataClass.UID,""),
+                sharedPreferences.getString(DataClass.USER_EMAIL,""),
+                sharedPreferences.getString(DataClass.USER_NAME,"")
         );
     }
 
@@ -100,7 +90,7 @@ public class ManageGroupFragment extends Fragment implements OnClickListener {
             if (result.getSuccessful() && result.getClassNameIdList().size()> 0) {
                 classSpinner.setEnabled(true);
                 ArrayAdapter<String> classAdapter = new ArrayAdapter<>(getContext(),
-                        android.R.layout.simple_spinner_item, classNameIDListToStringArray(result.getClassNameIdList()));
+                        android.R.layout.simple_spinner_item, DataClass.classNameIDListToStringArray(result.getClassNameIdList()));
                 classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 classSpinner.setAdapter(classAdapter);
                 classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

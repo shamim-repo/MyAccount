@@ -6,16 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.telentandtech.myaccount.database.entityes.Attendance;
-import com.telentandtech.myaccount.database.entityes.Students;
-import com.telentandtech.myaccount.database.resultObjects.AttendanceListResult;
-import com.telentandtech.myaccount.database.resultObjects.PaymentsListResult;
 import com.telentandtech.myaccount.database.resultObjects.StudentListResult;
 import com.telentandtech.myaccount.repository.AttendanceRepo;
 import com.telentandtech.myaccount.repository.PaymentRepo;
 import com.telentandtech.myaccount.repository.StudentRepo;
-
-import java.util.List;
+import com.telentandtech.myaccount.database.resultObjects.AttendanceListResult;
+import com.telentandtech.myaccount.database.resultObjects.PaymentsListResult;
 
 public class SettingViewModel extends AndroidViewModel {
     private StudentRepo studentRepo;

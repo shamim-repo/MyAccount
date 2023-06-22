@@ -8,13 +8,10 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.telentandtech.myaccount.database.entityes.Classe;
 import com.telentandtech.myaccount.database.entityes.Group;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
-import com.telentandtech.myaccount.database.resultObjects.ClassNameIdListResult;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Dao
@@ -27,6 +24,8 @@ public interface GroupDao {
     void updateGroup(Group group);
     @Query("SELECT * FROM 'groups' WHERE uid=:uid order by created_at  DESC")
     List<Group> getAllGroups(String uid);
+    @Query("SELECT * FROM 'groups' WHERE uid=:uid AND start_date BETWEEN :year AND (:year+10000) order by created_at  DESC")
+    List<GroupNameID> getGroupAllNameIDList(String uid, long year);
     @Query("SELECT * FROM 'groups' WHERE uid=:uid AND class_id = :class_id order by created_at  DESC")
     List<Group> getGroupsByClassId(String uid,long class_id);
     @Query("SELECT * FROM 'groups' WHERE uid=:uid AND group_id = :group_id order by created_at  DESC")

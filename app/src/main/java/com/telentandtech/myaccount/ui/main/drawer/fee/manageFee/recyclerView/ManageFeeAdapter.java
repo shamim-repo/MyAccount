@@ -9,14 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+
 import com.telentandtech.myaccount.R;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.core.OnClickListener;
 import com.telentandtech.myaccount.database.entityes.Fees;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 public class ManageFeeAdapter extends RecyclerView.Adapter<ManageFeeAdapter.ViewHolder>{

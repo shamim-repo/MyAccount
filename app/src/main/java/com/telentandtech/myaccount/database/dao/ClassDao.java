@@ -28,4 +28,7 @@ public interface ClassDao {
     Classe getClass(String uid, long classId);
     @Query("SELECT DISTINCT class_id,class_name  FROM 'classes' WHERE uid=:uid order by created_at  DESC")
     List<ClassNameId> getDistinctClassesList(String uid);
+    //get distinct class id name list
+    @Query("SELECT DISTINCT class_id,class_name  FROM 'classes' WHERE uid=:uid order by created_at  DESC")
+    LiveData<List<ClassNameId>> getDistinctClassesListLiveData(String uid);
 }

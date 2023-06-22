@@ -111,11 +111,11 @@
             tools:layout_editor_absoluteX="10dp" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/manage_attendance_fab"
+            android:id="@+id/manage_attendance_add_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
+            android:layout_margin="20dp"
             android:backgroundTint="@color/light_red"
             app:icon="@drawable/baseline_add_circle_24"
             app:iconSize="30dp"
@@ -131,6 +131,7 @@
         android:layout_height="60dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
+        android:visibility="gone"
         app:icon="@drawable/baseline_print_24"
         android:layout_gravity="bottom|end"
         app:layout_constraintBottom_toBottomOf="parent"

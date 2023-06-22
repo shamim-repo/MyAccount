@@ -6,6 +6,7 @@ import android.os.Looper;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.telentandtech.myaccount.database.dao.ClassDao;
 import com.telentandtech.myaccount.database.dao.GroupDao;
 import com.telentandtech.myaccount.database.dataBase.AccountDatabase;
 import com.telentandtech.myaccount.database.entityes.Group;
@@ -16,11 +17,8 @@ import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameIDListResult;
 import com.telentandtech.myaccount.database.resultObjects.GroupResult;
 
-import java.sql.Timestamp;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -28,6 +26,7 @@ public class GroupRepo {
 
     private AccountDatabase db;
     private GroupDao groupDao;
+    private ClassDao classDao;
     private TaskRunner taskRunner;
 
     private MutableLiveData<GroupResult> groupLiveData;
@@ -48,7 +47,7 @@ public class GroupRepo {
         groupInsertLiveData = new MutableLiveData<>();
         groupUpdateLiveData = new MutableLiveData<>();
         groupNameIDListMutableLiveData = new MutableLiveData<>();
-
+        classDao = db.classDao();
 
         taskRunner = new TaskRunner();
     }
@@ -202,7 +201,7 @@ public class GroupRepo {
 
         @Override
         public List<ClassNameId> call() throws Exception {
-            return groupDao.getDistinctClassNames(uid);
+            return classDao.getDistinctClassesList(uid);
         }
     }
 

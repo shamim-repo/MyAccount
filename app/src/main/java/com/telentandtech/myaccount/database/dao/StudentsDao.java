@@ -1,6 +1,5 @@
 package com.telentandtech.myaccount.database.dao;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -12,7 +11,6 @@ import com.telentandtech.myaccount.database.entityes.Students;
 import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Dao
@@ -40,8 +38,8 @@ public interface StudentsDao {
     List<GroupNameID> getDistinctGroupNames(String uid, long class_id);
     @Query("SELECT COUNT(*) FROM 'students' WHERE uid=:uid AND class_id=:class_id AND group_id=:group_id")
     Integer getStudentCount(String uid, long class_id,long group_id);
-    @Query("SELECT * FROM 'students' WHERE uid=:uid AND id = :id AND  group_id=:group_id AND class_id=:class_id AND created_at=:created_at order by created_at  DESC")
-    List<Students> getStudentsByStudentIdGCC(String uid, String id, long group_id, long class_id, Timestamp created_at);
+    @Query("SELECT * FROM 'students' WHERE uid=:uid AND id = :id AND  group_id=:group_id AND class_id=:class_id order by created_at  DESC")
+    List<Students> getStudentsByStudentIdGCC(String uid, String id, long group_id, long class_id);
 
 
 }

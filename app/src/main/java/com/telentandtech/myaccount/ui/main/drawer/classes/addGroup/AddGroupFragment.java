@@ -1,10 +1,5 @@
 package com.telentandtech.myaccount.ui.main.drawer.classes.addGroup;
 
-import static com.telentandtech.myaccount.core.DataClass.UID;
-import static com.telentandtech.myaccount.core.DataClass.USER_EMAIL;
-import static com.telentandtech.myaccount.core.DataClass.USER_NAME;
-import static com.telentandtech.myaccount.core.DataClass.classListToIdNameStringList;
-
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.SharedPreferences;
@@ -32,7 +27,9 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
+
 import com.telentandtech.myaccount.R;
+import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.core.TimeFormatHelper;
 import com.telentandtech.myaccount.database.entityes.Classe;
@@ -87,9 +84,9 @@ public class AddGroupFragment extends Fragment {
     private void getSharePref() {
         SharedPreferences sharedPref= PreferenceManager.getDefaultSharedPreferences(getContext());
         authUser = new User(
-                sharedPref.getString(UID, ""),
-                sharedPref.getString(USER_NAME, ""),
-                sharedPref.getString(USER_EMAIL, "")
+                sharedPref.getString(DataClass.UID, ""),
+                sharedPref.getString(DataClass.USER_NAME, ""),
+                sharedPref.getString(DataClass.USER_EMAIL, "")
         );
     }
 
@@ -124,7 +121,7 @@ public class AddGroupFragment extends Fragment {
                     selectClassSpinner.setEnabled(true);
                     selectClassSpinner.setAdapter(new ArrayAdapter<>(getContext(),
                             android.R.layout.simple_spinner_dropdown_item,
-                            classListToIdNameStringList(classes.getClassList())));
+                            DataClass.classListToIdNameStringList(classes.getClassList())));
                     selectClassSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

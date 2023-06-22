@@ -1,17 +1,8 @@
 package com.telentandtech.myaccount.ui.main.drawer.fee.manageFee;
 
-import static com.telentandtech.myaccount.core.DataClass.UID;
-import static com.telentandtech.myaccount.core.DataClass.USER_EMAIL;
-import static com.telentandtech.myaccount.core.DataClass.USER_NAME;
-import static com.telentandtech.myaccount.core.DataClass.classNameIDListToStringArray;
-import static com.telentandtech.myaccount.core.DataClass.groupNameIDListTOStringArray;
-
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,18 +17,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+
 import com.telentandtech.myaccount.R;
+import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.core.OnClickListener;
 import com.telentandtech.myaccount.database.entityes.Fees;
@@ -46,7 +35,6 @@ import com.telentandtech.myaccount.database.resultObjects.ClassNameId;
 import com.telentandtech.myaccount.database.resultObjects.GroupNameID;
 import com.telentandtech.myaccount.ui.main.drawer.fee.manageFee.recyclerView.ManageFeeAdapter;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public class ManageFeeFragment extends Fragment implements OnClickListener {
@@ -88,9 +76,9 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
     private void getSharedPref() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         authUser=new User(
-                sharedPreferences.getString(UID,""),
-                sharedPreferences.getString(USER_EMAIL,""),
-                sharedPreferences.getString(USER_NAME,"")
+                sharedPreferences.getString(DataClass.UID,""),
+                sharedPreferences.getString(DataClass.USER_EMAIL,""),
+                sharedPreferences.getString(DataClass.USER_NAME,"")
         );
     }
 
@@ -106,13 +94,14 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
         mViewModel.getClassNameIDListLiveData().observe(getViewLifecycleOwner(), classNameIDList -> {
             if (classNameIDList.getSuccessful()) {
                 ArrayAdapter<String> classAdapter = new ArrayAdapter<>(getContext(),
-                        android.R.layout.simple_spinner_item, classNameIDListToStringArray(classNameIDList.getClassNameIdList()));
+                        android.R.layout.simple_spinner_item, DataClass.classNameIDListToStringArray(classNameIDList.getClassNameIdList()));
                 classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 classSpinner.setAdapter(classAdapter);
 
                 classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        recyclerView.setAdapter(null);
                         mViewModel.getGroupNameIDList(authUser.getUid(),
                                 classNameIDList.getClassNameIdList().get(position).getClass_id());
                         selectedClassNameId = classNameIDList.getClassNameIdList().get(position);
@@ -130,12 +119,13 @@ public class ManageFeeFragment extends Fragment implements OnClickListener {
             if (groupNameIDList.getSuccessful()) {
                 ArrayAdapter<String> groupAdapter = new ArrayAdapter<>(getContext(),
                         android.R.layout.simple_spinner_item,
-                        groupNameIDListTOStringArray(groupNameIDList.getGroupNameIDList()));
+                        DataClass.groupNameIDListTOStringArray(groupNameIDList.getGroupNameIDList()));
                 groupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 groupSpinner.setAdapter(groupAdapter);
                 groupSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        recyclerView.setAdapter(null);
                         isList = true;
                         selectedGroupNameID = groupNameIDList.getGroupNameIDList().get(position);
                         mViewModel.getFeesList(authUser.getUid(), selectedClassNameId.getClass_id(), selectedGroupNameID.getGroup_id());

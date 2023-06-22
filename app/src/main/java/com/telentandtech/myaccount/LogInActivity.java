@@ -1,35 +1,23 @@
 package com.telentandtech.myaccount;
 
-import static android.app.PendingIntent.getActivity;
+
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.SharedPreferencesKt;
 import androidx.preference.PreferenceManager;
 
 import com.telentandtech.myaccount.core.DataClass;
-import com.telentandtech.myaccount.database.dao.UserDao;
-import com.telentandtech.myaccount.database.dataBase.AccountDatabase;
-import com.telentandtech.myaccount.database.entityes.User;
-import com.telentandtech.myaccount.repository.UserRepo;
 import com.telentandtech.myaccount.ui.main.login.LogInFragment;
 
 public class LogInActivity extends AppCompatActivity {
 
-    private User authUser;
-    private AccountDatabase accountDatabase;
-    private UserRepo userRepo;
 
 
     @Override

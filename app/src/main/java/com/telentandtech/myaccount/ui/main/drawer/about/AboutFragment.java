@@ -1,6 +1,5 @@
 package com.telentandtech.myaccount.ui.main.drawer.about;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import com.telentandtech.myaccount.R;
 
-import java.io.InputStream;
 
 /**
  * A simple {@link Fragment} subclass.

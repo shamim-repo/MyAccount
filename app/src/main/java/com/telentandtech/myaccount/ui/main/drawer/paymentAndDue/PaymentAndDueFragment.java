@@ -1,9 +1,5 @@
 package com.telentandtech.myaccount.ui.main.drawer.paymentAndDue;
 
-import static com.telentandtech.myaccount.core.DataClass.UID;
-import static com.telentandtech.myaccount.core.DataClass.USER_EMAIL;
-import static com.telentandtech.myaccount.core.DataClass.USER_NAME;
-
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -25,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -35,13 +30,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+
+import com.telentandtech.myaccount.DocumentUtils.CSVUtils;
+import com.telentandtech.myaccount.DocumentUtils.CSVtoPDFConverter;
+import com.telentandtech.myaccount.DocumentUtils.PdfDocumentAdapter;
 import com.telentandtech.myaccount.R;
 import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.core.OnClickListener;
-import com.telentandtech.myaccount.DocumentUtils.CSVUtils;
-import com.telentandtech.myaccount.DocumentUtils.CSVtoPDFConverter;
-import com.telentandtech.myaccount.DocumentUtils.PdfDocumentAdapter;
 import com.telentandtech.myaccount.database.entityes.Payments;
 import com.telentandtech.myaccount.database.entityes.User;
 import com.telentandtech.myaccount.ui.main.drawer.paymentAndDue.recycleView.PaymentDueAdapter;
@@ -93,9 +89,9 @@ public class PaymentAndDueFragment extends Fragment implements OnClickListener {
     private void getSharedPref() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         authUser=new User(
-                sharedPreferences.getString(UID,""),
-                sharedPreferences.getString(USER_EMAIL,""),
-                sharedPreferences.getString(USER_NAME,"")
+                sharedPreferences.getString(DataClass.UID,""),
+                sharedPreferences.getString(DataClass.USER_EMAIL,""),
+                sharedPreferences.getString(DataClass.USER_NAME,"")
         );
     }
     @Override
@@ -173,7 +169,7 @@ public class PaymentAndDueFragment extends Fragment implements OnClickListener {
                         recyclerView.setAdapter(null);
                         if (!paymentDateEditText.getText().toString().isEmpty()){
                             if(selectedDate != null){
-
+                                getPaymentList();
                             }
                         }
                     }
@@ -226,16 +222,13 @@ public class PaymentAndDueFragment extends Fragment implements OnClickListener {
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
         });
 
-        printButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("PaymentAndDueFragment", "onViewCreated: ");
-                if (adapter == null)
-                    return;
-                if (adapter.paymentsList.size() == 0)
-                    return;
-                createPrintDocument(adapter.paymentsList);
-            }
+        printButton.setOnClickListener(v -> {
+            Log.d("PaymentAndDueFragment", "onViewCreated: ");
+            if (adapter == null)
+                return;
+            if (adapter.paymentsList.size() == 0)
+                return;
+            createPrintDocument(adapter.paymentsList);
         });
 
         mViewModel.getDeletePaymentResultLiveData().observe(getViewLifecycleOwner(), deletePaymentResult -> {

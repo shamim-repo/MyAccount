@@ -9,7 +9,6 @@ import androidx.room.Update;
 
 import com.telentandtech.myaccount.database.entityes.User;
 
-import java.lang.annotation.Target;
 import java.util.List;
 
 @Dao

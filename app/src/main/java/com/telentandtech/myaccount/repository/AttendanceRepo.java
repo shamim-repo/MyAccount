@@ -133,16 +133,13 @@ public class AttendanceRepo {
     public void getAttendanceList(String uid, long group_id,long date) {
         taskRunner.executeAsync(new GetAttendanceList(uid,group_id,date), result -> {
             if (result != null && result.size() > 0) {
-                Log.d("AttendanceRepo", "getAttendanceList: Attendance List Successful"+result.size());
-                attendanceListLiveData.postValue(new
+                 attendanceListLiveData.postValue(new
                         AttendanceListResult(result, true, "Getting Attendance List Successful"));
             } else if (result != null && result.size() == 0) {
-                Log.d("AttendanceRepo", "getAttendanceList: No Attendance Found "+result.size());
                 attendanceListLiveData.postValue(new
                         AttendanceListResult(null, true, "No Attendance Found"));
             }else {
-                Log.d("AttendanceRepo", "getAttendanceList: "+false);
-                attendanceListLiveData.postValue(new
+                 attendanceListLiveData.postValue(new
                         AttendanceListResult(null, false, "Getting Attendance List Failed"));
             }
         });

@@ -6,7 +6,6 @@ import static com.telentandtech.myaccount.core.DataClass.USER_NAME;
 
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -24,7 +23,6 @@ import androidx.preference.PreferenceManager;
 
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +33,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.telentandtech.myaccount.DocumentUtils.CSVUtils;
 import com.telentandtech.myaccount.DocumentUtils.CSVtoPDFConverter;
 import com.telentandtech.myaccount.DocumentUtils.ListToXlsxConverter;
-import com.telentandtech.myaccount.LogInActivity;
 import com.telentandtech.myaccount.R;
+
 import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.database.dataBase.AccountDatabase;
@@ -51,7 +49,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.androidexception.roomdatabasebackupandrestore.Backup;
-import ir.androidexception.roomdatabasebackupandrestore.OnWorkFinishListener;
 import ir.androidexception.roomdatabasebackupandrestore.Restore;
 
 
@@ -122,9 +119,9 @@ public class SettingFragment extends Fragment {
         paymentCardView.setOnClickListener(v -> exportPaymentList());
 
         mViewModel.getAllStudentList().observe(getViewLifecycleOwner(), studentListResult -> {
-            if (studentListResult!=null){
+            studentListProgress.setVisibility(View.GONE);
+            if (studentListResult!=null && studentListResult.getStudentsList() !=null){
                 if (studentListResult.getStudentsList().size()>0){
-                    studentListProgress.setVisibility(View.GONE);
                     if (indicator==1){
                         exportPdfStudentList(studentListResult.getStudentsList());
                        }else if (indicator==-1){
@@ -135,9 +132,9 @@ public class SettingFragment extends Fragment {
         });
 
         mViewModel.getAllAttendanceList().observe(getViewLifecycleOwner(), attendanceListResult -> {
-            if (attendanceListResult!=null){
+            studentListProgress.setVisibility(View.GONE);
+            if (attendanceListResult!=null && attendanceListResult.getAttendanceList() !=null){
                 if (attendanceListResult.getAttendanceList().size()>0){
-                    studentListProgress.setVisibility(View.GONE);
                     if (indicator==1){
                         exportPdfAttendanceList(attendanceListResult.getAttendanceList());
                     }else if (indicator==-1){
@@ -148,9 +145,9 @@ public class SettingFragment extends Fragment {
         });
 
         mViewModel.getAllPaymentList().observe(getViewLifecycleOwner(), paymentListResult -> {
-            if (paymentListResult!=null){
+            studentListProgress.setVisibility(View.GONE);
+            if (paymentListResult!=null && paymentListResult.getPaymentsList() !=null){
                 if (paymentListResult.getPaymentsList().size()>0){
-                    studentListProgress.setVisibility(View.GONE);
                     if (indicator==1){
                         exportPdfPaymentList(paymentListResult.getPaymentsList());
                     }else if (indicator==-1){

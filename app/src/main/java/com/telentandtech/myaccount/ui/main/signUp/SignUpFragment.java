@@ -18,11 +18,12 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.telentandtech.myaccount.DrawerActivity;
 import com.telentandtech.myaccount.R;
+import com.telentandtech.myaccount.database.entityes.User;
+import com.telentandtech.myaccount.DrawerActivity;
+
 import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.DataValidation;
-import com.telentandtech.myaccount.database.entityes.User;
 
 public class SignUpFragment extends Fragment {
 

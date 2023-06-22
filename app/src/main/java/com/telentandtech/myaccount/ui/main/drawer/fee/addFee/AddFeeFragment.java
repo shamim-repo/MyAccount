@@ -1,11 +1,5 @@
 package com.telentandtech.myaccount.ui.main.drawer.fee.addFee;
 
-import static com.telentandtech.myaccount.core.DataClass.UID;
-import static com.telentandtech.myaccount.core.DataClass.USER_EMAIL;
-import static com.telentandtech.myaccount.core.DataClass.USER_NAME;
-import static com.telentandtech.myaccount.core.DataClass.classListToIdNameStringList;
-import static com.telentandtech.myaccount.core.DataClass.groupListToIdNameStringList;
-
 import androidx.core.util.Pair;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -17,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +24,9 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
+
 import com.telentandtech.myaccount.R;
+import com.telentandtech.myaccount.core.DataClass;
 import com.telentandtech.myaccount.core.DateObj;
 import com.telentandtech.myaccount.database.entityes.Classe;
 import com.telentandtech.myaccount.database.entityes.Fees;
@@ -57,8 +52,6 @@ public class AddFeeFragment extends Fragment {
     private Long selectedMonth2;
     private boolean insertStatus=false;
     private boolean rangePicker=false;
-    private int insertCount = 0;
-    private int count = 0;
     private ProgressBar progressBar;
 
     public static AddFeeFragment newInstance() {
@@ -81,9 +74,9 @@ public class AddFeeFragment extends Fragment {
     private void getSharedPref() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         authUser=new User(
-                sharedPreferences.getString(UID,""),
-                sharedPreferences.getString(USER_EMAIL,""),
-                sharedPreferences.getString(USER_NAME,"")
+                sharedPreferences.getString(DataClass.UID,""),
+                sharedPreferences.getString(DataClass.USER_EMAIL,""),
+                sharedPreferences.getString(DataClass.USER_NAME,"")
         );
     }
 
@@ -108,7 +101,7 @@ public class AddFeeFragment extends Fragment {
             if (classes.isSuccessful()) {
                 ArrayAdapter<String> classAdapter =
                         new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,
-                classListToIdNameStringList(classes.getClassList()));
+                DataClass.classListToIdNameStringList(classes.getClassList()));
                 classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 addFeeClassSpinner.setAdapter(classAdapter);
                 addFeeClassSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
@@ -132,7 +125,7 @@ public class AddFeeFragment extends Fragment {
             if (groups.isSuccessful()) {
                 ArrayAdapter<String> groupAdapter =
                         new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,
-                groupListToIdNameStringList(groups.getGroupList()));
+                DataClass.groupListToIdNameStringList(groups.getGroupList()));
                 groupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 addFeeGroupSpinner.setAdapter(groupAdapter);
                 addFeeGroupSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
@@ -209,7 +202,6 @@ public class AddFeeFragment extends Fragment {
                         pickMonthButton.requestFocus();
                     } else {
                         progressBar.setVisibility(View.VISIBLE);
-                        insertCount = 0;
                         for(long mont: DateObj.dateRangeToMonthYearList(selectedMonth,selectedMonth2)){
                             Fees fees = new Fees(
                                     selectedClass.getClass_name(), selectedClass.getClass_id(),
@@ -218,7 +210,6 @@ public class AddFeeFragment extends Fragment {
                                     authUser.getUid()
                             );
                             mViewModel.insertFees(fees);
-                            insertCount++;
                         }
                     }
                 } else {
@@ -239,28 +230,14 @@ public class AddFeeFragment extends Fragment {
             if (!insertStatus)
                 return;
             if (feesResult.isSuccessful()) {
-                if (rangePicker) {
-                    count++;
-                    if (insertCount == 1) {
-                        Toast.makeText(getContext(), count + "Month Fee Added", Toast.LENGTH_SHORT).show();
-                        addFeeAmountEditText.setText("");
-                        addFeeMonthEditText.setText("");
-                        selectedMonth = null;
-                        selectedMonth2 = null;
-                        count = 0;
-                        progressBar.setVisibility(View.GONE);
-                    }
-                    insertCount--;
-                } else {
-                    Toast.makeText(getContext(), feesResult.getMessage(), Toast.LENGTH_SHORT).show();
-                    addFeeAmountEditText.setText("");
-                    addFeeMonthEditText.setText("");
-                    selectedMonth = null;
-                    selectedMonth2 = null;
-                    count = 0;
-                    progressBar.setVisibility(View.GONE);
-                }
+                Toast.makeText(getContext(),  "Fee Added", Toast.LENGTH_SHORT).show();
+                addFeeAmountEditText.setText("");
+                addFeeMonthEditText.setText("");
+                selectedMonth = null;
+                selectedMonth2 = null;
+                progressBar.setVisibility(View.GONE);
             }
+
         });
 
 
