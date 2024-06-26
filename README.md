@@ -2,7 +2,7 @@
 An app to manage student accounts and tracks attendance for a private tutoring center.
 
 # Preview 
-<img width="716" alt="Screenshot 2023-08-23 at 4 11 00 PM" src="https://github.com/shamim-repo/MyAccount/blob/master/My%20Account%20(10).jpeg">
+<img width="200" height="600" alt="Screenshot 2023-08-23 at 4 11 00 PM" src="https://github.com/shamim-repo/MyAccount/blob/master/My%20Account%20(10).jpeg">
 <img width="716" alt="Screenshot 2023-08-23 at 4 11 00 PM" src="https://github.com/shamim-repo/MyAccount/blob/master/My%20Account%20(9).jpeg">
 <img width="716" alt="Screenshot 2023-08-23 at 4 11 00 PM" src="https://github.com/shamim-repo/MyAccount/blob/master/My%20Account%20(8).jpeg">
 <br>
